@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://menu/MainMenu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Jogar" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -447.0
+margin_top = -88.0
+margin_right = -167.0
+margin_bottom = -33.0
+custom_fonts/font = SubResource( 1 )
+text = "JOGAR"
+
+[node name="Opcoes" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -445.708
+margin_top = 3.75732
+margin_right = -165.708
+margin_bottom = 58.7573
+custom_fonts/font = SubResource( 1 )
+text = "OPÇÕES"
+
+[node name="Sair" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -445.708
+margin_top = 96.807
+margin_right = -165.708
+margin_bottom = 151.807
+custom_fonts/font = SubResource( 1 )
+text = "SAIR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Jogar" to="." method="_on_Jogar_pressed"]
+[connection signal="pressed" from="Sair" to="." method="_on_Sair_pressed"]
