@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Lost And Found"
+run/main_scene="res://quest/Interface.tscn"
 config/icon="res://icon.png"
 
 [rendering]
