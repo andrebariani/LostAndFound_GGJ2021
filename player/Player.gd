@@ -1,16 +1,151 @@
 extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export (int) var MAX_SPEED = 300
+export (int) var MAX_JUMP = 300
+export (int) var MIN_JUMP = 300
+export (int) var FLOOR_ACC = 175
+export (int) var FLOOR_FRICTION = 125
+export (int) var AIR_ACC = 125
+export (int) var GRAVITY = 30
+export (int) var AIR_FINAL_SPEED = 1100
+export (int) var COYOTE_JUMP_FRAMES = 7
+export (bool) var CAN_DASH = false
+export (int) var DASH_SPEED = 700
+export (int) var DASH_FRAMES = 15
+enum GRAVITY_DIR { DOWN, RIGHT, UP, LEFT }
+export(GRAVITY_DIR) var START_GRAVITY_DIR
+export (int) var MAX_AIRHOP = 0
+export (bool) var CAN_WALLJUMP = false
 
 
-# Called when the node enters the scene tree for the first time.
+onready var sm = $States
+onready var inputs = $Inputs
+onready var debug = $Debug
+
+
+var max_speed
+var gravity
+var air_final_speed
+var max_jump
+var min_jump
+var floor_acc
+var floor_friction
+var air_acc
+var dash_speed
+
+
+var velocity = Vector2(0,0)
+var velocity_jump = 0
+var velocity_move = 0
+
+var dir = 0
+var ori = 1
+var gravity_dir
+var gravity_on = true
+var floor_jump = false
+var floor_normal = Vector2(0,0)
+
+
+var input_dir_vector = Vector2(0,0)
+var input_jump_p = 0
+var input_jump_jp = 0
+var input_jump_jr = 0
+var input_sprint = 0
+var input_dash = 0
+
+
+var cooldowns = {
+	"coyote": {
+		max_value = COYOTE_JUMP_FRAMES,
+		value = COYOTE_JUMP_FRAMES
+	},
+	"dash": {
+		max_value = DASH_FRAMES,
+		value = DASH_FRAMES
+	},
+}
+
+
+var has_control = true
+var debug_on = true
+
+
 func _ready():
-	pass # Replace with function body.
+	max_speed = MAX_SPEED
+	gravity = GRAVITY
+	air_final_speed = AIR_FINAL_SPEED
+	max_jump = MAX_JUMP
+	min_jump = MIN_JUMP
+	floor_acc = FLOOR_ACC
+	floor_friction = FLOOR_FRICTION
+	air_acc = AIR_ACC
+	dash_speed = DASH_SPEED
+	
+	sm.init(self, "Idle")
+	inputs.init(self)
+	gravity_dir = START_GRAVITY_DIR
+	if debug_on:
+		debug.visible = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	pass
+	if has_control:
+		inputs.get_inputs()
+
+	update_cooldown()
+
+	sm.run_sm(delta)
+	
+	self.apply_velocity()
+	
+	if debug_on:
+		debug.get_child(0).set_text(str(velocity))
+		debug.get_child(1).set_text(str(sm.state_curr))
+		pass
+
+	
+func apply_velocity():
+	var snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
+	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
+
+	if gravity_on:
+		velocity_jump = approach(velocity_jump, air_final_speed, gravity)
+
+	match gravity_dir:
+		GRAVITY_DIR.DOWN:
+			velocity.x = velocity_move
+			velocity.y = velocity_jump
+		GRAVITY_DIR.RIGHT:
+			velocity.y = velocity_move
+			velocity.x = velocity_jump
+		GRAVITY_DIR.UP:
+			velocity.x = velocity_move
+			velocity.y =  -velocity_jump
+		GRAVITY_DIR.LEFT:
+			velocity.y = velocity_move
+			velocity.x = -velocity_jump
+
+	velocity = move_and_slide(velocity, floor_normals[gravity_dir])
+
+
+func update_cooldown():
+	for cd in cooldowns.values():
+		cd.value = min(cd.value + 1, cd.max_value)
+
+
+func change_ori(_ori):
+	if(ori != _ori and _ori != 0):
+		ori = _ori
+
+
+func approach(a, b, amount):
+	if (a < b):
+		a += amount
+		if (a > b):
+			return b
+	else:
+		a -= amount
+		if(a < b):
+			return b
+	return a
