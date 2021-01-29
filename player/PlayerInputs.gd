@@ -10,11 +10,10 @@ func init(_entity):
 
 func get_inputs():
 	# Reset inputs
-	player.input_jump_p = 0
-	player.input_jump_jp = 0
-	player.input_jump_jr = 0
-	player.input_sprint = 0
-	player.input_dash = 0
+	for i in player.inputs.keys():
+		player.inputs[i] = 0
+	
+	player.last_input_dir_vector = player.input_dir_vector
 	
 	player.input_dir_vector.x = Input.get_action_strength("ui_right") \
 								- Input.get_action_strength("ui_left") 
@@ -29,17 +28,17 @@ func get_inputs():
 		player.change_ori(player.input_dir_vector.x)
 	
 	if Input.is_action_pressed("ui_accept"):
-		player.input_jump_p = 1
+		player.inputs.input_jump_p = 1
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		player.input_jump_jp = 1
+		player.inputs.input_jump_jp = 1
 	
 	if Input.is_action_just_released("ui_accept"):
-		player.input_jump_jr = 1
+		player.inputs.input_jump_jr = 1
 	
-	if Input.is_action_pressed("ui_select"):
-		player.input_sprint = 1
+	if Input.is_action_pressed("sprint"):
+		player.inputs.input_sprint = 1
 		
-	if Input.is_action_pressed("dash"):
-		player.input_dash = 1
+	if Input.is_action_pressed("dash") and player.CAN_DASH:
+		player.inputs.input_dash = 1
 	pass
