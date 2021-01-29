@@ -39,6 +39,6 @@ func get_inputs():
 	if Input.is_action_pressed("sprint"):
 		player.inputs.input_sprint = 1
 		
-	if Input.is_action_pressed("dash") and player.CAN_DASH:
+	if Input.is_action_just_pressed("dash") and player.CAN_DASH:
 		player.inputs.input_dash = 1
 	pass

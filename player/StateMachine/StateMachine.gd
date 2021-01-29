@@ -29,4 +29,5 @@ func run_sm(_delta):
 
 
 func change_state(new_state:String):
+	print_debug(new_state)
 	state_next = new_state
