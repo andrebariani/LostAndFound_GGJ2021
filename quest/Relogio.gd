@@ -19,10 +19,7 @@ func relogio():
 	clock += 1
 	# Horas
 	var horas = clock/60
-	if horas < 10:
-		text = "0"
-	else:
-		text = ""
+	text = ""
 	text += str(horas)
 	
 	# Minutos
@@ -32,7 +29,3 @@ func relogio():
 	else:
 		text += ":"
 	text += str(minutos)
-
-
-func _on_Timer_timeout():
-	relogio()

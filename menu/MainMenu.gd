@@ -1,19 +1,12 @@
-extends Control
+extends "res://menu/Menu.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func action():
+	match(menu_offset - (parent.get_child_count()-3)):
+		0:
+			get_tree().change_scene("res://menu/MainMenu.tscn")
+		1:
+			get_tree().change_scene("res://menu/MainMenu.tscn")
+		2:
+			get_tree().quit()
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-func _on_Jogar_pressed():
-	get_tree().change_scene("res://menu/MainMenu.tscn")
-
-
-func _on_Sair_pressed():
-	get_tree().quit()

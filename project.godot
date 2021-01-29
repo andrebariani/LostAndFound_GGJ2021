@@ -19,6 +19,10 @@ config/name="Lost And Found"
 run/main_scene="res://quest/Interface.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/height=576
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

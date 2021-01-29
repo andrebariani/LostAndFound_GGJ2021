@@ -1,14 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://quest/Retangulo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/dialog_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://quest/DialogController.gd" type="Script" id=3]
 [ext_resource path="res://quest/Interface.gd" type="Script" id=4]
 [ext_resource path="res://assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://quest/Relogio.gd" type="Script" id=6]
+[ext_resource path="res://quest/Relogio.tscn" type="PackedScene" id=6]
 [ext_resource path="res://quest/QuestDisplay.gd" type="Script" id=7]
 [ext_resource path="res://quest/Pedido.tscn" type="PackedScene" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://quest/Ending.gd" type="Script" id=10]
+[ext_resource path="res://quest/Pause.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_dialog"
@@ -26,13 +28,65 @@ tracks/0/keys = {
 "values": [ Vector2( 82, 620 ), Vector2( 82, 400 ) ]
 }
 
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 5 )
-
 [sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "activate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pedidos:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -800, 71 ), Vector2( 144, 71 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Background:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.509804 ) ]
+}
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "pause"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pause:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 356.587, -524.893 ), Vector2( 356.587, 60 ) ]
+}
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
@@ -80,23 +134,7 @@ anims/show_dialog = SubResource( 1 )
 [node name="TextScroll" type="Timer" parent="DialogController"]
 wait_time = 0.05
 
-[node name="Relogio" type="Label" parent="."]
-margin_left = 833.52
-margin_top = 16.0
-margin_right = 1001.52
-margin_bottom = 83.0
-custom_fonts/font = SubResource( 2 )
-text = "00:00
-"
-align = 2
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Timer" type="Timer" parent="Relogio"]
-autostart = true
+[node name="Relogio" parent="." instance=ExtResource( 6 )]
 
 [node name="QuestDisplay" type="Control" parent="."]
 anchor_left = 1.0
@@ -126,6 +164,218 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="Ending" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Ending"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pedidos" parent="Ending" instance=ExtResource( 1 )]
+margin_left = -1312.0
+margin_top = -217.0
+margin_right = -584.006
+margin_bottom = 233.0
+color = Color( 0.0862745, 0.192157, 0.360784, 0.670588 )
+
+[node name="Titulo" type="Label" parent="Ending/Pedidos"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -260.094
+margin_top = 43.76
+margin_right = 267.906
+margin_bottom = 93.76
+custom_fonts/font = SubResource( 4 )
+text = "FIM DE JOGO"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vidas" type="Label" parent="Ending/Pedidos"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -236.937
+margin_top = 150.415
+margin_right = 241.063
+margin_bottom = 200.415
+custom_fonts/font = SubResource( 5 )
+text = "VIDAS: 5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tempo" type="Label" parent="Ending/Pedidos"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -238.165
+margin_top = 215.485
+margin_right = 239.835
+margin_bottom = 265.485
+custom_fonts/font = SubResource( 5 )
+text = "TEMPO: 250"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Satisfacao" type="Label" parent="Ending/Pedidos"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -238.165
+margin_top = 279.328
+margin_right = 239.835
+margin_bottom = 329.328
+custom_fonts/font = SubResource( 5 )
+text = "SATISFAÇÃO: 3/9"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pontuacao" type="Label" parent="Ending/Pedidos"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -237.057
+margin_top = 343.594
+margin_right = 242.943
+margin_bottom = 393.594
+custom_fonts/font = SubResource( 5 )
+text = "PONTUAÇÃO: 300"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ending"]
+anims/activate = SubResource( 6 )
+
+[node name="Pause" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+parent = NodePath("Pause")
+
+[node name="Pause" parent="Pause" instance=ExtResource( 1 )]
+margin_left = -155.413
+margin_top = -812.893
+margin_right = 145.587
+margin_bottom = -357.893
+color = Color( 0.0862745, 0.192157, 0.360784, 0.670588 )
+
+[node name="Titulo" type="Label" parent="Pause/Pause"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -260.094
+margin_top = 43.76
+margin_right = 267.906
+margin_bottom = 93.76
+custom_fonts/font = SubResource( 4 )
+text = "PAUSA"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continuar" parent="Pause/Pause" instance=ExtResource( 1 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_left = -119.036
+margin_top = 147.489
+margin_right = 118.964
+margin_bottom = 203.489
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Label" type="Label" parent="Pause/Pause/Continuar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -89.172
+margin_top = 3.58228
+margin_right = 90.828
+margin_bottom = 53.5823
+custom_fonts/font = SubResource( 7 )
+text = "CONTINUAR"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" parent="Pause/Pause" instance=ExtResource( 1 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_left = -118.946
+margin_top = 241.422
+margin_right = 119.054
+margin_bottom = 297.422
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Label" type="Label" parent="Pause/Pause/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -89.172
+margin_top = 3.58228
+margin_right = 90.828
+margin_bottom = 53.5823
+custom_fonts/font = SubResource( 7 )
+text = "MENU"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sair" parent="Pause/Pause" instance=ExtResource( 1 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_left = -121.825
+margin_top = 340.107
+margin_right = 116.175
+margin_bottom = 396.107
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Label" type="Label" parent="Pause/Pause/Sair"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -89.172
+margin_top = 3.58228
+margin_right = 90.828
+margin_bottom = 53.5823
+custom_fonts/font = SubResource( 7 )
+text = "SAIR"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pause"]
+anims/pause = SubResource( 8 )
 [connection signal="animation_finished" from="DialogController/AnimationPlayer" to="DialogController" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DialogController/TextScroll" to="DialogController" method="_on_TextScroll_timeout"]
-[connection signal="timeout" from="Relogio/Timer" to="Relogio" method="_on_Timer_timeout"]

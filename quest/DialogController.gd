@@ -5,8 +5,8 @@ var _current_line = ""
 var _showing = false
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
-		if _showing and event.scancode == KEY_ENTER:
+	if event.is_action_pressed("ui_accept"):
+		if _showing:
 			if $DialogBox/Label.text.length() < _current_line.length():
 				$DialogBox/Label.text = _current_line
 				$TextScroll.stop()
