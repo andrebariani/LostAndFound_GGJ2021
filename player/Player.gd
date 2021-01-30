@@ -24,6 +24,7 @@ export (int) var AIR_MOMENTUM_FRAMES = 10
 
 onready var sm = $States
 onready var inputHelper = $Inputs
+onready var playerBody = $PlayerBody
 onready var debug = $Debug
 
 
@@ -146,6 +147,8 @@ func update_cooldown():
 func change_ori(_ori):
 	if(ori != _ori and _ori != 0):
 		ori = _ori
+		playerBody.scale.x *= -1
+		
 
 
 func approach(a, b, amount):
