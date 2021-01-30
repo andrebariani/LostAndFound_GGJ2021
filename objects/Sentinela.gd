@@ -1,16 +1,32 @@
 extends Node2D
 
+export(NodePath) var alvo
+export(PackedScene) var tiro
+var activated = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	alvo = get_node(alvo)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if !activated:
+		return
+	
+	rotation = position.angle_to_point(Vector2(alvo.position))
+
+
+func set_activated(a):
+	activated = a
+
+
+func _on_Timer_timeout():
+	if !activated:
+		return
+	
+	print_debug(position.distance_to(alvo.position))
+	
+	if position.distance_to(alvo.position) <= 1250:
+		var new = tiro.instance()
+		get_parent().add_child(new)
+		new.position = position
+		new.set_alvo(alvo)

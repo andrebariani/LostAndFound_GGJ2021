@@ -11,8 +11,8 @@ func _ready():
 func new_dialog(lines):
 	$DialogController.new_dialog(lines)
 
-func add_pedido(sprite, id):
-	$QuestDisplay.add_pedido(sprite, id)
+func add_pedido(sprite_, id):
+	$QuestDisplay.add_pedido(sprite_, id)
 
 func delete_pedido(id):
 	$QuestDisplay.delete_pedido(id)

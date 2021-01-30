@@ -2,10 +2,6 @@ extends Control
 
 const ox_max = 225
 
-func _ready():
-	update_oxigenio(0.4)
-
-
 func set_ferramenta(sprite):
 	$Ferramenta.texture = sprite
 
