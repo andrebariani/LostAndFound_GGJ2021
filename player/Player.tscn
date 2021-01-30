@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -9,9 +9,14 @@
 [ext_resource path="res://player/StateMachine/state_dash.gd" type="Script" id=7]
 [ext_resource path="res://player/StateMachine/state_walljump.gd" type="Script" id=8]
 [ext_resource path="res://player/player_body/PlayerBody.tscn" type="PackedScene" id=9]
+[ext_resource path="res://player/GrabRange.gd" type="Script" id=10]
+[ext_resource path="res://icon.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 24 )
+extents = Vector2( 8, 20 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 24.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -44,6 +49,7 @@ script = ExtResource( 8 )
 script = ExtResource( 4 )
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="Debug" type="Control" parent="."]
@@ -75,3 +81,27 @@ __meta__ = {
 current = true
 
 [node name="PlayerBody" parent="." instance=ExtResource( 9 )]
+
+[node name="GrabRange" type="Area2D" parent="PlayerBody"]
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+script = ExtResource( 10 )
+
+[node name="ItemPlace" type="Position2D" parent="PlayerBody/GrabRange"]
+position = Vector2( 16, 0 )
+
+[node name="Sprite" type="Sprite" parent="PlayerBody/GrabRange/ItemPlace"]
+visible = false
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/GrabRange"]
+position = Vector2( 16, 0 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="PlayerBody/GrabRange"]
+wait_time = 0.5
+one_shot = true
+[connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
+[connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
+[connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]

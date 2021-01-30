@@ -20,12 +20,12 @@ func run(_delta):
 	if p.is_on_floor():
 		p.velocity_jump = 0
 	
-	if p.inputs.input_dash:
+	if p.inputs.dash:
 		p.cooldowns.dash.value = 0
 		stateMachine.change_state("Dash")
-	elif p.input_dir_vector != Vector2.ZERO:
+	elif p.input_dir_vector.x != 0:
 		stateMachine.change_state("Move")
-	elif p.inputs.input_jump_jp:
+	elif p.inputs.jump_jp:
 		p.velocity_jump = -p.max_jump
 		p.floor_jump = true
 		stateMachine.change_state("Air")

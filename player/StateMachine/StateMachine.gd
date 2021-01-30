@@ -15,6 +15,7 @@ func init(_entity, initial_state:String = "Idle"):
 		self.states[state_node.name] = state_node
 		state_node.stateMachine = self
 		state_node.p = self.entity
+		
 	state_next = initial_state
 	
 	
@@ -29,5 +30,5 @@ func run_sm(_delta):
 
 
 func change_state(new_state:String):
-	print_debug(new_state)
+	# print_debug(new_state)
 	state_next = new_state

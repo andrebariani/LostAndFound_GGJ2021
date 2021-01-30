@@ -25,6 +25,7 @@ export (int) var AIR_MOMENTUM_FRAMES = 10
 onready var sm = $States
 onready var inputHelper = $Inputs
 onready var playerBody = $PlayerBody
+onready var grabRange = $PlayerBody/GrabRange
 onready var debug = $Debug
 
 
@@ -57,11 +58,12 @@ var last_velocity_move_sign # Used mainly in walljump
 
 
 var inputs = {
-	input_jump_p = 0,
-	input_jump_jp = 0,
-	input_jump_jr = 0,
-	input_sprint = 0,
-	input_dash = 0
+	jump_p = 0,
+	jump_jp = 0,
+	jump_jr = 0,
+	sprint = 0,
+	dash = 0,
+	grab = 0
 }
 
 
@@ -87,12 +89,14 @@ var cooldowns = {
 
 var has_control = true
 var debug_on = true
+var is_held = false
+var item
 
 
 func _ready():
-	
 	sm.init(self, "Idle")
 	inputHelper.init(self)
+	grabRange.init(self)
 	gravity_dir = START_GRAVITY_DIR
 	
 	if debug_on:
@@ -107,6 +111,12 @@ func _physics_process(delta):
 
 	sm.run_sm(delta)
 	
+	if inputs.grab:
+		if grabRange.is_held:
+			grabRange.throw()
+		else:
+			grabRange.grab_nearest()
+	
 	self.apply_velocity()
 	
 	if debug_on:
@@ -118,6 +128,12 @@ func _physics_process(delta):
 func apply_velocity():
 	var snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
+
+	if sm.state_curr == "Walljump":
+		if ori != -last_velocity_move_sign:
+			change_ori(-last_velocity_move_sign)
+	else:
+		change_ori(sign(input_dir_vector.x))
 
 	if gravity_on:
 		velocity_jump = approach(velocity_jump, air_final_speed, gravity)
@@ -148,7 +164,6 @@ func change_ori(_ori):
 	if(ori != _ori and _ori != 0):
 		ori = _ori
 		playerBody.scale.x *= -1
-		
 
 
 func approach(a, b, amount):
