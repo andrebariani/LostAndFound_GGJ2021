@@ -2,6 +2,8 @@ extends Control
 
 export(Texture) var sprite
 
+signal dialogo_terminado
+
 func _ready():
 	new_dialog(["Olá!", "Hello Word", "bazuca"])
 	$QuestDisplay.add_pedido(sprite, 0)
@@ -24,3 +26,7 @@ func ending(vitoria, vidas, tempo, satisfacao, count, pontuacao):
 func clock():
 	$Relogio.clock()
 	$QuestDisplay.clock()
+
+
+func _on_DialogController_dialogo_terminado():
+	emit_signal("dialogo_terminado")

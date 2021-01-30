@@ -4,6 +4,8 @@ var _lines = []
 var _current_line = ""
 var _showing = false
 
+signal dialogo_terminado
+
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		if _showing:
@@ -23,6 +25,7 @@ func next_dialog():
 	if _lines.empty():
 		$AnimationPlayer.play_backwards("show_dialog")
 		_showing = false
+		emit_signal("dialogo_terminado")
 		return
 	
 	if !_showing:
