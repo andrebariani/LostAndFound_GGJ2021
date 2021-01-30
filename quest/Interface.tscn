@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://quest/Retangulo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/dialog_font.tres" type="DynamicFont" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://quest/Ending.gd" type="Script" id=10]
 [ext_resource path="res://quest/Pause.gd" type="Script" id=11]
+[ext_resource path="res://quest/GameUI.gd" type="Script" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_dialog"
@@ -28,19 +29,19 @@ tracks/0/keys = {
 "values": [ Vector2( 82, 620 ), Vector2( 82, 400 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "activate"
 length = 0.5
 tracks/0/type = "value"
@@ -68,11 +69,11 @@ tracks/1/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.509804 ) ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 size = 20
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "pause"
 length = 0.5
 tracks/0/type = "value"
@@ -86,6 +87,38 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 356.587, -524.893 ), Vector2( 356.587, 60 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hide"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="Interface" type="Control"]
@@ -157,7 +190,7 @@ margin_left = 144.622
 margin_top = -47.1454
 margin_right = 240.622
 margin_bottom = -9.14543
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "3/8"
 align = 2
 __meta__ = {
@@ -179,6 +212,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -196,7 +230,7 @@ margin_left = -260.094
 margin_top = 43.76
 margin_right = 267.906
 margin_bottom = 93.76
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "FIM DE JOGO"
 align = 1
 valign = 1
@@ -211,7 +245,7 @@ margin_left = -236.937
 margin_top = 150.415
 margin_right = 241.063
 margin_bottom = 200.415
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "VIDAS: 5"
 align = 1
 valign = 1
@@ -226,7 +260,7 @@ margin_left = -238.165
 margin_top = 215.485
 margin_right = 239.835
 margin_bottom = 265.485
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "TEMPO: 250"
 align = 1
 valign = 1
@@ -241,7 +275,7 @@ margin_left = -238.165
 margin_top = 279.328
 margin_right = 239.835
 margin_bottom = 329.328
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "SATISFAÇÃO: 3/9"
 align = 1
 valign = 1
@@ -256,7 +290,7 @@ margin_left = -237.057
 margin_top = 343.594
 margin_right = 242.943
 margin_bottom = 393.594
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "PONTUAÇÃO: 300"
 align = 1
 valign = 1
@@ -265,7 +299,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ending"]
-anims/activate = SubResource( 6 )
+anims/activate = SubResource( 5 )
 
 [node name="Pause" type="Control" parent="."]
 pause_mode = 2
@@ -292,7 +326,7 @@ margin_left = -260.094
 margin_top = 43.76
 margin_right = 267.906
 margin_bottom = 93.76
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "PAUSA"
 align = 1
 valign = 1
@@ -316,7 +350,7 @@ margin_left = -89.172
 margin_top = 3.58228
 margin_right = 90.828
 margin_bottom = 53.5823
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "CONTINUAR"
 align = 1
 valign = 1
@@ -341,7 +375,7 @@ margin_left = -89.172
 margin_top = 3.58228
 margin_right = 90.828
 margin_bottom = 53.5823
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "MENU"
 align = 1
 valign = 1
@@ -366,7 +400,7 @@ margin_left = -89.172
 margin_top = 3.58228
 margin_right = 90.828
 margin_bottom = 53.5823
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "SAIR"
 align = 1
 valign = 1
@@ -376,6 +410,145 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pause"]
-anims/pause = SubResource( 8 )
+anims/pause = SubResource( 7 )
+
+[node name="GameUI" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pedidos" parent="GameUI" instance=ExtResource( 1 )]
+margin_left = -496.965
+margin_top = 19.0871
+margin_right = -460.965
+margin_bottom = 250.087
+
+[node name="Meter" type="ColorRect" parent="GameUI/Pedidos"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -2.99995
+color = Color( 0.419608, 0.694118, 0.756863, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="O2" type="Label" parent="GameUI"]
+margin_left = 18.479
+margin_top = 547.585
+margin_right = 50.479
+margin_bottom = 563.585
+custom_fonts/font = ExtResource( 2 )
+text = "O2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Control" parent="GameUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health1" type="TextureRect" parent="GameUI/Health"]
+margin_left = -495.935
+margin_top = -194.239
+margin_right = -431.935
+margin_bottom = -130.239
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health2" type="TextureRect" parent="GameUI/Health"]
+margin_left = -457.17
+margin_top = -194.239
+margin_right = -393.17
+margin_bottom = -130.239
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health3" type="TextureRect" parent="GameUI/Health"]
+margin_left = -418.641
+margin_top = -194.477
+margin_right = -354.641
+margin_bottom = -130.477
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health4" type="TextureRect" parent="GameUI/Health"]
+margin_left = -380.589
+margin_top = -194.477
+margin_right = -316.589
+margin_bottom = -130.477
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health5" type="TextureRect" parent="GameUI/Health"]
+margin_left = -342.061
+margin_top = -194.477
+margin_right = -278.061
+margin_bottom = -130.477
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuadroFerramenta" parent="GameUI" instance=ExtResource( 1 )]
+margin_left = -496.0
+margin_top = -272.0
+margin_right = -432.0
+margin_bottom = -208.0
+
+[node name="Ferramenta" type="TextureRect" parent="GameUI"]
+margin_left = 16.0018
+margin_top = 16.8877
+margin_right = 80.0018
+margin_bottom = 80.8877
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuadroItem" parent="GameUI" instance=ExtResource( 1 )]
+margin_left = -416.0
+margin_top = -272.0
+margin_right = -352.0
+margin_bottom = -208.0
+
+[node name="Item" type="TextureRect" parent="GameUI"]
+margin_left = 96.2027
+margin_top = 16.8877
+margin_right = 160.203
+margin_bottom = 80.8877
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameUI"]
+anims/hide = SubResource( 8 )
+anims/show = SubResource( 9 )
 [connection signal="animation_finished" from="DialogController/AnimationPlayer" to="DialogController" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DialogController/TextScroll" to="DialogController" method="_on_TextScroll_timeout"]

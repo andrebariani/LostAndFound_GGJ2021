@@ -40,5 +40,5 @@ func run(_delta):
 			stateMachine.change_state("Move")
 	elif not p.is_on_wall():
 		p.gravity_on = true
-		p.velocity_move == 0
+		p.velocity_move = 0
 		stateMachine.change_state("Air")

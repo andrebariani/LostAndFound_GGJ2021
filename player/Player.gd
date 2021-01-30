@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 export (int) var MAX_SPEED = 300
 export (int) var MAX_JUMP = 300
 export (int) var MIN_JUMP = 300
@@ -88,7 +87,6 @@ var cooldowns = {
 var has_control = true
 var debug_on = true
 
-
 func _ready():
 	
 	sm.init(self, "Idle")
@@ -116,7 +114,7 @@ func _physics_process(delta):
 
 	
 func apply_velocity():
-	var snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
+	var _snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
 
 	if gravity_on:
