@@ -27,7 +27,7 @@ func _input(event):
 		action()
 
 
-func navigation(up, down):
+func navigation(up, _down):
 	parent.get_child(menu_offset).set("color", color_active)
 	if up:
 		if menu_offset == parent.get_child_count()-3:
