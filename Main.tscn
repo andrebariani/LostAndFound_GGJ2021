@@ -260,3 +260,5 @@ position = Vector2( 3014.1, 465.501 )
 [node name="Gate2" parent="World/Objetos" instance=ExtResource( 11 )]
 position = Vector2( 528.334, -832.358 )
 rotation = 1.5708
+
+[node name="Node2D" type="Node2D" parent="World"]
