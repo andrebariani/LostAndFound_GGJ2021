@@ -585,5 +585,6 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameUI"]
 anims/hide = SubResource( 8 )
 anims/show = SubResource( 9 )
+[connection signal="dialogo_terminado" from="DialogController" to="." method="_on_DialogController_dialogo_terminado"]
 [connection signal="animation_finished" from="DialogController/AnimationPlayer" to="DialogController" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DialogController/TextScroll" to="DialogController" method="_on_TextScroll_timeout"]
