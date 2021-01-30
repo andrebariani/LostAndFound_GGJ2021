@@ -1,6 +1,77 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
+[ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://player/StateMachine/state_idle.gd" type="Script" id=3]
+[ext_resource path="res://player/PlayerInputs.gd" type="Script" id=4]
+[ext_resource path="res://player/StateMachine/state_move.gd" type="Script" id=5]
+[ext_resource path="res://player/StateMachine/state_air.gd" type="Script" id=6]
+[ext_resource path="res://player/StateMachine/state_dash.gd" type="Script" id=7]
+[ext_resource path="res://player/StateMachine/state_walljump.gd" type="Script" id=8]
+[ext_resource path="res://player/player_body/PlayerBody.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 24 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+MAX_SPEED = 400
+MAX_JUMP = 1100
+MIN_JUMP = 500
+AIR_ACC = 75
+GRAVITY = 45
+START_GRAVITY_DIR = 2
+
+[node name="States" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="Air" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="Dash" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="Walljump" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="Inputs" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Debug" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="velocity" type="Label" parent="Debug"]
+margin_left = -24.0
+margin_top = -40.0
+margin_right = 24.0
+margin_bottom = -24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="state" type="Label" parent="Debug"]
+margin_left = -24.0
+margin_top = -64.0
+margin_right = 24.0
+margin_bottom = -48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="PlayerBody" parent="." instance=ExtResource( 9 )]
