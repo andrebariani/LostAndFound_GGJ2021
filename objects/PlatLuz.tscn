@@ -10,11 +10,12 @@ extents = Vector2( 116.63, 6.31898 )
 script = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 2, 2 )
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 32, 32 )
+cell_size = Vector2( 16, 16 )
 collision_layer = 4
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0 )
+tile_data = PoolIntArray( 0, 1, 131072, 1, 1, 131073, 2, 1, 131073, 3, 1, 131073, 4, 1, 131073, 5, 1, 131073, 6, 1, 131073, 7, 1, 131074, 65536, 1, 262144, 65537, 1, 262145, 65538, 1, 262145, 65539, 1, 262145, 65540, 1, 262145, 65541, 1, 262145, 65542, 1, 262145, 65543, 1, 262146 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
