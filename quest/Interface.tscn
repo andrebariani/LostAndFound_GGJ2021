@@ -28,19 +28,19 @@ tracks/0/keys = {
 "values": [ Vector2( 82, 620 ), Vector2( 82, 400 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "activate"
 length = 0.5
 tracks/0/type = "value"
@@ -68,11 +68,11 @@ tracks/1/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.509804 ) ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 size = 20
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "pause"
 length = 0.5
 tracks/0/type = "value"
@@ -157,7 +157,7 @@ margin_left = 144.622
 margin_top = -47.1454
 margin_right = 240.622
 margin_bottom = -9.14543
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "3/8"
 align = 2
 __meta__ = {
@@ -196,7 +196,7 @@ margin_left = -260.094
 margin_top = 43.76
 margin_right = 267.906
 margin_bottom = 93.76
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "FIM DE JOGO"
 align = 1
 valign = 1
@@ -211,7 +211,7 @@ margin_left = -236.937
 margin_top = 150.415
 margin_right = 241.063
 margin_bottom = 200.415
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "VIDAS: 5"
 align = 1
 valign = 1
@@ -226,7 +226,7 @@ margin_left = -238.165
 margin_top = 215.485
 margin_right = 239.835
 margin_bottom = 265.485
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "TEMPO: 250"
 align = 1
 valign = 1
@@ -241,7 +241,7 @@ margin_left = -238.165
 margin_top = 279.328
 margin_right = 239.835
 margin_bottom = 329.328
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "SATISFAÇÃO: 3/9"
 align = 1
 valign = 1
@@ -256,7 +256,7 @@ margin_left = -237.057
 margin_top = 343.594
 margin_right = 242.943
 margin_bottom = 393.594
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "PONTUAÇÃO: 300"
 align = 1
 valign = 1
@@ -265,7 +265,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ending"]
-anims/activate = SubResource( 6 )
+anims/activate = SubResource( 5 )
 
 [node name="Pause" type="Control" parent="."]
 pause_mode = 2
@@ -292,7 +292,7 @@ margin_left = -260.094
 margin_top = 43.76
 margin_right = 267.906
 margin_bottom = 93.76
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "PAUSA"
 align = 1
 valign = 1
@@ -316,7 +316,7 @@ margin_left = -89.172
 margin_top = 3.58228
 margin_right = 90.828
 margin_bottom = 53.5823
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "CONTINUAR"
 align = 1
 valign = 1
@@ -341,7 +341,7 @@ margin_left = -89.172
 margin_top = 3.58228
 margin_right = 90.828
 margin_bottom = 53.5823
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "MENU"
 align = 1
 valign = 1
@@ -366,7 +366,7 @@ margin_left = -89.172
 margin_top = 3.58228
 margin_right = 90.828
 margin_bottom = 53.5823
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "SAIR"
 align = 1
 valign = 1
@@ -376,6 +376,6 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pause"]
-anims/pause = SubResource( 8 )
+anims/pause = SubResource( 7 )
 [connection signal="animation_finished" from="DialogController/AnimationPlayer" to="DialogController" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DialogController/TextScroll" to="DialogController" method="_on_TextScroll_timeout"]
