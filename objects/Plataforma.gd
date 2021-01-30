@@ -15,7 +15,7 @@ func _ready():
 	origin_position = self.position
 
 
-func _physics_process(delta):
+func _process(_delta):
 	if activated == false:
 		return
 	
@@ -34,8 +34,6 @@ func _physics_process(delta):
 	for body in body_array:
 		body.position.x = body.position.x + (velocidade*direcaox)
 		body.position.y = body.position.y + (velocidade*direcaoy) 
-	#print((int(self.position.x - origin_position.x)^2 + int(self.position.y - origin_position.y)^2))
-	#print(x*x)
 
 
 func set_activated(new):
@@ -49,11 +47,8 @@ func invert_direction():
 
 func _on_Area2D_body_entered(body):
 	body_array.append(body)
+	print_debug("ADDED")
 
 func _on_Area2D_body_exited(body):
 	body_array.erase(body)
-
-
-func plate_updated(pressed):
-	if pressed:
-		set_activated(true)
+	print_debug("ERASED")

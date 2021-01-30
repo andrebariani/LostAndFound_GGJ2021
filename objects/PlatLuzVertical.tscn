@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=1]
+[ext_resource path="res://objects/PlatLuz.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25.2572, 6.31898 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9.61926, 137.181 )
+
+[node name="Plataforma" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 4
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 65536, 0, 0, 65537, 0, 0, 131072, 0, 0, 131073, 0, 0, 196608, 0, 0, 196609, 0, 0, 262144, 0, 0, 262145, 0, 0, 327680, 0, 0, 327681, 0, 0, 393216, 0, 0, 393217, 0, 0, 458752, 0, 0, 458753, 0, 0, 524288, 0, 0, 524289, 0, 0 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 32.7034, -2.7092 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2.5052, 143.422 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Grace" type="Timer" parent="."]
+one_shot = true
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Grace" to="." method="_on_Grace_timeout"]

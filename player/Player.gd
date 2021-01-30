@@ -122,7 +122,7 @@ func _physics_process(delta):
 
 	
 func apply_velocity():
-	var snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
+	var _snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
 
 	if gravity_on:
