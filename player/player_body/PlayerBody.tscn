@@ -7,6 +7,7 @@
 graph_offset = Vector2( 0, -195 )
 
 [node name="PlayerBody" type="Node2D"]
+scale = Vector2( -1, 1 )
 script = ExtResource( 1 )
 
 [node name="BodyAnimationTree" type="AnimationTree" parent="."]
