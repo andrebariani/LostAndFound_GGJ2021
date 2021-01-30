@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://player/StateMachine/state_air.gd" type="Script" id=6]
 [ext_resource path="res://player/StateMachine/state_dash.gd" type="Script" id=7]
 [ext_resource path="res://player/StateMachine/state_walljump.gd" type="Script" id=8]
+[ext_resource path="res://player/player_body/PlayerBody.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 24 )
@@ -69,3 +70,8 @@ margin_bottom = -48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="PlayerBody" parent="." instance=ExtResource( 9 )]

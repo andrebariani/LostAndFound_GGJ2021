@@ -12,17 +12,11 @@ func init():
 func run(_delta):
 	var dir = p.input_dir_vector
 	
-	#if p.cooldowns.air_momentum.value != p.cooldowns.air_momentum.max_value:
-	#	if p.cooldowns.air_momentum.value > 8 and dir.x == (-p.last_velocity_move_sign):
-	#		p.velocity_move = p.approach(p.velocity_move, p.max_speed * dir.x, p.air_acc)
-	#		p.cooldowns.air_momentum.value = p.cooldowns.air_momentum.max_value
-	#	else: 
-	#		p.velocity_move = p.approach(p.velocity_move, p.max_speed * \
-	#								p.last_velocity_move_sign, p.air_acc)
-	#else:
-	#	p.velocity_move = p.approach(p.velocity_move, p.max_speed * dir.x, p.air_acc)
-	
-	p.velocity_move = p.approach(p.velocity_move, p.max_speed * dir.x, p.air_acc)
+	if stateMachine.state_last == "Walljump" and  \
+			p.cooldowns.air_momentum.value < p.cooldowns.air_momentum.max_value:
+		p.velocity_move = p.max_speed * -p.last_velocity_move_sign
+	else:
+		p.velocity_move = p.approach(p.velocity_move, p.max_speed * dir.x, p.air_acc)
 	
 	if p.inputs.input_jump_jp:
 		if p.cooldowns.coyote.value < p.cooldowns.coyote.max_value:

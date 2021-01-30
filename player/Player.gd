@@ -23,19 +23,20 @@ export (int) var AIR_MOMENTUM_FRAMES = 10
 
 onready var sm = $States
 onready var inputHelper = $Inputs
+onready var playerBody = $PlayerBody
 onready var debug = $Debug
 
 
-var max_speed
-var gravity
-var air_final_speed
-var max_jump
-var min_jump
-var floor_acc
-var floor_friction
-var air_acc
-var dash_speed
-var wallslide_speed
+onready var max_speed = MAX_SPEED
+onready var gravity = GRAVITY
+onready var air_final_speed = AIR_FINAL_SPEED
+onready var max_jump = MAX_JUMP
+onready var min_jump = MIN_JUMP
+onready var floor_acc = FLOOR_ACC
+onready var floor_friction = FLOOR_FRICTION
+onready var air_acc = AIR_ACC
+onready var dash_speed = DASH_SPEED
+onready var wallslide_speed = WALLSLIDE_SPEED
 
 
 var velocity = Vector2(0,0)
@@ -87,20 +88,11 @@ var has_control = true
 var debug_on = true
 
 func _ready():
-	max_speed = MAX_SPEED
-	gravity = GRAVITY
-	air_final_speed = AIR_FINAL_SPEED
-	max_jump = MAX_JUMP
-	min_jump = MIN_JUMP
-	floor_acc = FLOOR_ACC
-	floor_friction = FLOOR_FRICTION
-	air_acc = AIR_ACC
-	dash_speed = DASH_SPEED
-	wallslide_speed = WALLSLIDE_SPEED
 	
 	sm.init(self, "Idle")
 	inputHelper.init(self)
 	gravity_dir = START_GRAVITY_DIR
+	
 	if debug_on:
 		debug.visible = true
 
@@ -153,6 +145,8 @@ func update_cooldown():
 func change_ori(_ori):
 	if(ori != _ori and _ori != 0):
 		ori = _ori
+		playerBody.scale.x *= -1
+		
 
 
 func approach(a, b, amount):

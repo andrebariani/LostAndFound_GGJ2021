@@ -23,8 +23,9 @@ func run(_delta):
 	p.floor_jump = false
 	
 	if p.is_on_floor():
+		p.gravity_on = true
 		p.velocity_jump = 0
-
+		stateMachine.change_state("Idle")
 	elif p.inputs.input_jump_jp:
 		p.velocity_jump = -(p.max_jump - 100)
 		p.velocity_move = p.last_velocity_move_sign * -1 * (p.max_speed)
