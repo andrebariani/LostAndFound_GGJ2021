@@ -560,9 +560,9 @@ margin_bottom = -200.0
 [node name="Ferramenta" type="TextureRect" parent="GameUI"]
 margin_left = 16.0
 margin_top = 17.0
-margin_right = 32.0
-margin_bottom = 33.0
-rect_scale = Vector2( 4, 4 )
+margin_right = 48.0
+margin_bottom = 49.0
+rect_scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
