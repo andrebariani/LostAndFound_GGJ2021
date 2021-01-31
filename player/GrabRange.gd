@@ -6,9 +6,15 @@ signal can_grab
 var item_in_range
 var is_held = false
 
-var item = preload("res://Items/ItemBase.tscn")
+var item_base = preload("res://Items/ItemBase.tscn")
 
-onready var place = $ItemPlace/Sprite
+var item = {
+	texture = Texture,
+	id = 0,
+	item_name = ""
+}
+
+onready var item_sprite = $ItemPlace/Sprite
 onready var collision = $CollisionShape2D
 onready var timer = $Timer
 
@@ -24,23 +30,30 @@ func _physics_process(delta):
 func grab_nearest():
 	if item_in_range:
 		collision.disabled = true
+		item.texture = item_in_range.texture
+		item.id = item_in_range.id
+		item.item_name = item_in_range.item_name
+		item_sprite.texture = item_in_range.sprite.texture
 		item_in_range.queue_free()
 		item_in_range = null
-		place.visible = true
+		item_sprite.visible = true
 		is_held = true
 
 
 func throw():
-	if place.visible == true and is_held == true:
-		var i = item.instance()
+	if item_sprite.visible == true and is_held == true:
+		var i = item_base.instance()
+		i.texture = item.texture
+		i.id = item.id
+		i.item_name = item.item_name
 		i.global_position = $ItemPlace.global_position
 		if p.input_dir_vector.x != 0:
-			i.throwed(p.ori)
+			i.throw(p.ori)
 		else:
-			i.throwed(0)
+			i.throw(0)
 		p.get_parent().add_child(i)
 		timer.start()
-		place.visible = false
+		item_sprite.visible = false
 		is_held = false
 
 
