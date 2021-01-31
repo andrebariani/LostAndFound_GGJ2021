@@ -1,7 +1,6 @@
 extends Node
 
 var spawn_points = []
-export(PackedScene) var object_scene
 export var clients = []
 export(NodePath) var player
 var dialog

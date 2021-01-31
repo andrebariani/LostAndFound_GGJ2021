@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=1]
+[ext_resource path="res://objects/Plataforma.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 73.2385, 6.31898 )
+
+[node name="Plataforma" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 4
+format = 1
+tile_data = PoolIntArray( 0, 1, 131072, 1, 1, 131073, 2, 1, 131073, 3, 1, 131073, 4, 1, 131073, 5, 1, 131073, 6, 1, 131073, 7, 1, 131073, 8, 1, 131073, 9, 1, 131074, 65536, 1, 262144, 65537, 1, 262145, 65538, 1, 262145, 65539, 1, 262145, 65540, 1, 262145, 65541, 1, 262145, 65542, 1, 262145, 65543, 1, 262145, 65544, 1, 262145, 65545, 1, 262146 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 79.7516, -2.9237 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
