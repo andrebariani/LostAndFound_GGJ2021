@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://player/StateMachine/state_walljump.gd" type="Script" id=8]
 [ext_resource path="res://player/player_body/PlayerBody.tscn" type="PackedScene" id=9]
 [ext_resource path="res://player/GrabRange.gd" type="Script" id=10]
+[ext_resource path="res://assets/images/space_background.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 20 )
@@ -104,3 +105,9 @@ one_shot = true
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="space_background" type="Sprite" parent="ParallaxBackground"]
+texture = ExtResource( 10 )
+centered = false
