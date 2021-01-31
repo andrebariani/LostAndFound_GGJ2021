@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=2]
@@ -45,6 +45,7 @@
 [ext_resource path="res://assets/images/tools/gravity.png" type="Texture" id=43]
 [ext_resource path="res://assets/images/tools/jetpack.png" type="Texture" id=44]
 [ext_resource path="res://assets/tileset/janela.png" type="Texture" id=45]
+[ext_resource path="res://objects/Lava.tscn" type="PackedScene" id=46]
 
 [sub_resource type="TileSet" id=1]
 0/name = "spaceship_tileset.png 0"
@@ -984,6 +985,10 @@ direcaox = 1
 position = Vector2( 3064, -1232 )
 velocidade = 8
 direcaox = 1
+
+[node name="Lava" parent="World/Objetos" instance=ExtResource( 46 )]
+position = Vector2( 5760, 584 )
+scale = Vector2( 550, 12 )
 
 [node name="Dispensers" type="Node2D" parent="World"]
 
