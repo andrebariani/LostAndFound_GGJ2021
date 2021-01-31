@@ -20,6 +20,7 @@ func _physics_process(delta):
 					i.queue_free()
 					spawn()
 
+
 func _ready():
 	var i = get_child(2)
 	
@@ -45,3 +46,4 @@ func force_spawn():
 			if i.item_name == item.item_name:
 				i.queue_free()
 				spawn()
+
