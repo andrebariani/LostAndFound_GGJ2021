@@ -13,7 +13,7 @@ func _on_Button_body_exited(body):
 		p = null
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if p:
 		if p.inputs.grab:
 			d.force_spawn()

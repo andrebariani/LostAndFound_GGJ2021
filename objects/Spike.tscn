@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/images/spike.png" type="Texture" id=1]
-[ext_resource path="res://objects/Laser.gd" type="Script" id=2]
+[ext_resource path="res://objects/Spike.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.97151, 3.53099 )
@@ -22,8 +22,6 @@ collision_layer = 16
 position = Vector2( 0, -3.50964 )
 shape = SubResource( 1 )
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 8
 
@@ -31,4 +29,3 @@ collision_layer = 8
 position = Vector2( -0.0595379, 3.98908 )
 shape = SubResource( 2 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,8 +1,6 @@
 extends Position2D
 
-
-onready var item_base = preload("res://Items/ItemBase.tscn")
-
+export var item_base = preload("res://Items/ItemBase.tscn")
 
 onready var item = {
 	texture = Texture,
@@ -11,7 +9,7 @@ onready var item = {
 }
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_tree().get_nodes_in_group(item.item_name).size():
 		var i = get_tree().get_nodes_in_group(item.item_name)[0]
 		if i:
@@ -22,12 +20,14 @@ func _physics_process(delta):
 
 
 func _ready():
+	ready()
+
+func ready():
 	var i = get_child(2)
 	
 	item.texture = i.texture
 	item.id = i.id
 	item.item_name = i.item_name
-
 
 func spawn():
 	var i = item_base.instance()
@@ -35,7 +35,8 @@ func spawn():
 	i.id = item.id
 	i.item_name = item.item_name
 	i.global_position = self.global_position
-	print_debug(i.global_position)
+	i.dispenser = self
+	#print_debug(i.global_position)
 	self.get_parent().add_child(i)
 	
 	

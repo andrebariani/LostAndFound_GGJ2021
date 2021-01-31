@@ -14,17 +14,19 @@ export (int) var DASH_SPEED = 700
 export (int) var DASH_FRAMES = 15
 enum GRAVITY_DIR { DOWN, RIGHT, UP, LEFT }
 export(GRAVITY_DIR) var START_GRAVITY_DIR
-export (int) var MAX_AIRHOP = 0
+export (int) var MAX_MULTIJUMP = 0
 export (bool) var CAN_WALLJUMP = true
 export (int) var WALLSLIDE_SPEED = 100
 export (int) var WALLJUMP_FRAMES = 10
 export (int) var AIR_MOMENTUM_FRAMES = 10
+export (int) var MAX_OXYGEN = 100
 
 
 onready var sm = $States
 onready var inputHelper = $Inputs
 onready var playerBody = $PlayerBody
 onready var grabRange = $PlayerBody/GrabRange
+onready var grabRangeTool = $PlayerBody/GrabRangeTool
 onready var debug = $Debug
 
 
@@ -37,6 +39,7 @@ onready var floor_acc = FLOOR_ACC
 onready var floor_friction = FLOOR_FRICTION
 onready var air_acc = AIR_ACC
 onready var dash_speed = DASH_SPEED
+onready var max_multijump = MAX_MULTIJUMP
 onready var wallslide_speed = WALLSLIDE_SPEED
 
 
@@ -45,7 +48,9 @@ var velocity_jump = 0
 var velocity_move = 0
 
 var ori = 1
-var gravity_dir
+var gravity_dir = GRAVITY_DIR.DOWN
+var last_gravity_dir
+var multijump = 0
 var gravity_on = true
 var floor_jump = false
 var floor_normal = Vector2(0,0)
@@ -62,7 +67,9 @@ var inputs = {
 	jump_jr = 0,
 	sprint = 0,
 	dash = 0,
-	grab = 0
+	grab = 0,
+	drop = 0,
+	use = 0
 }
 
 
@@ -85,21 +92,30 @@ var cooldowns = {
 	},
 }
 
+var damage_taken = 0
+var oxygen = MAX_OXYGEN
+var breathing = true
+
+var ferramenta = null
 
 var has_control = true
 var debug_on = true
-var is_held = false
 
+var item = null
+onready var checkpoint_pos = position
 
-var item
-var checkpoint_pos
-
+signal taken_damage
+signal update_oxygen
+signal update_tool
+signal update_item
 
 func _ready():
 	sm.init(self, "Idle")
 	inputHelper.init(self)
 	grabRange.init(self)
+	grabRangeTool.init(self)
 	gravity_dir = START_GRAVITY_DIR
+	self.set_gravity(START_GRAVITY_DIR)
 	
 	if debug_on:
 		debug.visible = true
@@ -108,28 +124,43 @@ func _ready():
 func _physics_process(delta):
 	if has_control:
 		inputHelper.get_inputs()
-
+	
 	update_cooldown()
-
 	sm.run_sm(delta)
 	
 	if inputs.grab:
-		if grabRange.is_held:
+		var picked_up = false
+		if !grabRangeTool.is_held:
+			if grabRangeTool.grab_nearest():
+				emit_signal("update_tool", grabRangeTool.item.texture)
+				equip_tool()
+				picked_up = true
+			
+		if !picked_up and !grabRange.is_held:
+			if grabRange.grab_nearest():
+				emit_signal("update_item", get_item_id())
+	
+	elif inputs.drop:
+		if grabRangeTool.is_held:
+			grabRangeTool.throw()
+			emit_signal("update_tool", null)
+			multijump = 0
+		elif grabRange.is_held:
 			grabRange.throw()
-		else:
-			grabRange.grab_nearest()
+			emit_signal("update_item", null)
+	
+	if inputs.use:
+		use_tool()
 	
 	self.apply_velocity(delta)
-	
-	self.take_damage()
 	
 	if debug_on:
 		debug.get_child(0).set_text(str(velocity))
 		debug.get_child(1).set_text(str(sm.state_curr))
 		pass
 
-	
-func apply_velocity(delta):
+
+func apply_velocity(_delta):
 	var snaps = [Vector2(0, 16), Vector2(16, 0), Vector2(0, -16), Vector2(-16, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
 
@@ -160,6 +191,66 @@ func apply_velocity(delta):
 		floor_normals[gravity_dir])
 
 
+
+func use_tool():
+	if is_tool_held():
+		match(get_tool_id()):
+			0:
+				get_tree().call_group("gates", "toggle")
+			1:
+				get_tree().call_group("electric", "toggle")
+			2:
+				fill_oxygen()
+			3:
+				if gravity_dir == GRAVITY_DIR.DOWN:
+					gravity_dir = GRAVITY_DIR.UP
+				else:
+					gravity_dir = GRAVITY_DIR.DOWN
+			4:
+				multijump = 1
+
+
+func equip_tool():
+	if get_tool_id() == 4:
+		multijump = 1
+	else:
+		multijump = 0
+
+
+func set_gravity(_grav):
+	if _grav != gravity_dir:
+		last_gravity_dir = gravity_dir
+		gravity_dir = _grav
+		
+		# jump_velocity = 0
+		
+		match gravity_dir:
+			GRAVITY_DIR.DOWN:
+				if last_gravity_dir != GRAVITY_DIR.LEFT:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, 0, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+			GRAVITY_DIR.RIGHT:
+				if last_gravity_dir != GRAVITY_DIR.UP:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, -90, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+			GRAVITY_DIR.UP:
+				if last_gravity_dir != GRAVITY_DIR.RIGHT:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, -180, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+			GRAVITY_DIR.LEFT:
+				if last_gravity_dir != GRAVITY_DIR.DOWN:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, 90, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+
+
 func update_cooldown():
 	for cd in cooldowns.values():
 		cd.value = min(cd.value + 1, cd.max_value)
@@ -184,4 +275,50 @@ func approach(a, b, amount):
 
 
 func take_damage():
-	pass
+	damage_taken += 1
+	emit_signal("taken_damage")
+	if is_held():
+		grabRange.destroy()
+	else:
+		position = checkpoint_pos
+
+
+func lose_oxygen():
+	if oxygen > 20:
+		oxygen -= 20
+	else:
+		take_damage()
+		fill_oxygen()
+	emit_signal("update_oxygen", float(oxygen)/float(MAX_OXYGEN))
+
+
+func fill_oxygen():
+	oxygen = MAX_OXYGEN
+	emit_signal("update_oxygen", 1)
+
+func destroy_item():
+	grabRange.destroy()
+
+func is_held():
+	return grabRange.is_held
+
+func is_tool_held():
+	return grabRangeTool.is_held
+
+func get_tool_id():
+	return grabRangeTool.item.id
+
+func get_item_id():
+	return grabRange.item.id
+
+func get_damage_taken():
+	return damage_taken
+
+func set_checkpoint(pos):
+	checkpoint_pos = pos
+
+func get_breathing():
+	return breathing
+
+func set_breathing(b):
+	breathing = b
