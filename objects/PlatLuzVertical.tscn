@@ -11,6 +11,7 @@ extents = Vector2( 9.61926, 137.181 )
 
 [node name="Plataforma" type="Node2D"]
 script = ExtResource( 2 )
+activated = false
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 2, 2 )

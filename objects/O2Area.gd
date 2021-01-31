@@ -6,22 +6,23 @@ var wait_and_see = false
 func _on_Area2D_body_entered(body):
 	if body.has_method("lose_oxygen"):
 		player = body
-		player.set_breathing(false)
-		$Timer.start()
+		player.add_breathing(1)
+		$Timer.start(1)
 
 
 func _on_Area2D_body_exited(body):
 	if body.has_method("fill_oxygen"):
-		player.set_breathing(true)
+		body.add_breathing(-1)
 		wait_and_see = true
-		$Timer.start(0.2)
+		$Timer.start(0.05)
 
 
 func _on_Timer_timeout():
 	if player != null:
-		if wait_and_see and player.get_breathing():
+		if wait_and_see and player.get_breathing() <= 0:
+			wait_and_see = false
 			player.fill_oxygen()
 			$Timer.stop()
 			player = null
 		else:
-			player.lose_oxygen()
+			$Timer.start(1)

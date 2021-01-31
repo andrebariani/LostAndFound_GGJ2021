@@ -26,7 +26,7 @@ func delete_pedido(id):
 	$Count.text = str(pedido_count) + "/8"
 	for pedido in pedidos:
 		if pedido.get_id() == id:
-			pedido_positions.erase(pedido.rect_position/float(Y_OFFSET))
+			pedido_positions.erase(pedido.rect_position/Y_OFFSET)
 			pedidos.erase(pedido)
 			pedido.queue_free()
 			break

@@ -18,6 +18,7 @@ func add_pedido(sprite_, id):
 
 func delete_pedido(id):
 	$QuestDisplay.delete_pedido(id)
+	set_item(null)
 
 func set_ferramenta(_sprite):
 	$GameUI.set_ferramenta(_sprite)

@@ -94,7 +94,8 @@ var cooldowns = {
 
 var damage_taken = 0
 var oxygen = MAX_OXYGEN
-var breathing = true
+var breathing = 0
+var hyperjump = 0
 
 var ferramenta = null
 
@@ -152,6 +153,10 @@ func _physics_process(delta):
 	if inputs.use:
 		use_tool()
 	
+	if hyperjump > 0:
+		hyperjump -= delta
+		velocity_jump = -1000
+	
 	self.apply_velocity(delta)
 	
 	if debug_on:
@@ -172,7 +177,7 @@ func apply_velocity(_delta):
 
 	if gravity_on:
 		velocity_jump = approach(velocity_jump, air_final_speed, gravity)
-
+	
 	match gravity_dir:
 		GRAVITY_DIR.DOWN:
 			velocity.x = velocity_move
@@ -186,7 +191,7 @@ func apply_velocity(_delta):
 		GRAVITY_DIR.LEFT:
 			velocity.y = velocity_move
 			velocity.x = -velocity_jump
-
+	
 	velocity = move_and_slide_with_snap(velocity, snaps[gravity_dir], \
 		floor_normals[gravity_dir])
 
@@ -320,5 +325,5 @@ func set_checkpoint(pos):
 func get_breathing():
 	return breathing
 
-func set_breathing(b):
-	breathing = b
+func add_breathing(b):
+	breathing += b
