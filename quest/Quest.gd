@@ -20,6 +20,8 @@ signal endgame
 
 
 func _ready():
+	player = get_node(player)
+	
 	dialog = [
 		[("Aí, filho, o moço trouxe a Suketa. Agora, bebe e fica quietinho, ok?!"), 
 		"Eba! Valeu, tio! Mãe, a gente vai pra casa agora?",
@@ -48,7 +50,8 @@ func _ready():
 		"...Ah, você não pode comer em serviço? Desculpa...", "...", "...", "Bom... eu vou indo, então.",
 		"T-Tchau! Tchauzinho!"],
 		["Oooooi! Trouxe o bonsai pra mim?", "...Ah, perfeito! Eu tava tão sozinho no meio da estrada, fugindo dos meus amigos...",
-		"Hm? Porque eu tô fugindo? Ah, pique-esconde, é claro!", "...", "O jogo já acabou? QUÊ??? Meu primo falou isso pra você?",
+		"Hm? Porque eu tô fugindo? Ah, pique-esconde, é claro!", "...", 
+		"O jogo já acabou? QUÊ??? Meu primo falou isso pra você?",
 		"Vou voltar pro pique, então! Obrigado, sr. funcionário!"],
 		["...", "Essa... Essa não era exatamente o tipo de lâmpada que eu estava procurando, criatura.",
 		"...Porém, sob segunda inspeção... hm.", 
@@ -58,7 +61,7 @@ func _ready():
 		["Oi, trouxe a coxinha pra mim? Aí, valeu.", "...",
 		"Aí, deve ser muito louco trabalhar aí durante as festas. Lugar vazio, sossegado... né não?",
 		"Mas ao mesmo tempo não é minha praia. Deve ficar chato depois de um tempo. Eu vivo por aventura, arriscar a vida, tá ligado?",
-		"E esse seu trabalho... Po, deve ser só ficar confinado aí nessa sala, buscando coxinha... Sem ofensa nem nada, hehe.",
+		"E esse seu trabalho... Pô, deve ser só ficar confinado aí nessa sala, buscando coxinha... Sem ofensa nem nada, hehe.",
 		"Eita, perdi meu horário. Tenho que ir indo, vou fazer crossfit com uma galera.",
 		"Falou, cara."],
 	]
@@ -79,6 +82,7 @@ func receive_order(id):
 		emit_signal("change_sprite", clients[id])
 		emit_signal("new_dialog", dialog[id])
 		$Timer.stop()
+		player.has_control = false
 		active_quests.erase(id)
 	
 	if times[id] <= 120:
@@ -89,6 +93,7 @@ func receive_order(id):
 
 func finalize_order():
 	$Timer.start()
+	player.has_control = true
 	if received >= 9:
 		endgame()
 
