@@ -50,7 +50,7 @@ var velocity_move = 0
 var ori = 1
 var gravity_dir = GRAVITY_DIR.DOWN
 var last_gravity_dir
-var multijump
+var multijump = 0
 var gravity_on = true
 var floor_jump = false
 var floor_normal = Vector2(0,0)
@@ -133,6 +133,7 @@ func _physics_process(delta):
 		if !grabRangeTool.is_held:
 			if grabRangeTool.grab_nearest():
 				emit_signal("update_tool", grabRangeTool.item.texture)
+				equip_tool()
 				picked_up = true
 			
 		if !picked_up and !grabRange.is_held:
@@ -143,6 +144,7 @@ func _physics_process(delta):
 		if grabRangeTool.is_held:
 			grabRangeTool.throw()
 			emit_signal("update_tool", null)
+			multijump = 0
 		elif grabRange.is_held:
 			grabRange.throw()
 			emit_signal("update_item", null)
@@ -204,6 +206,15 @@ func use_tool():
 					gravity_dir = GRAVITY_DIR.UP
 				else:
 					gravity_dir = GRAVITY_DIR.DOWN
+			4:
+				multijump = 1
+
+
+func equip_tool():
+	if get_tool_id() == 4:
+		multijump = 1
+	else:
+		multijump = 0
 
 
 func set_gravity(_grav):

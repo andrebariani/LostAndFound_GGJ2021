@@ -175,10 +175,8 @@ margin_top = -1322.54
 margin_right = 1319.73
 margin_bottom = -1230.54
 custom_fonts/font = ExtResource( 7 )
-text = "Com a Mochila a Jatos,
-segure Pular para voar.
-Tome cuidado para não
-explodir"
+text = "Use a Mochila a Jatos e aperte Pular para dar um salto extra. A mochila não tem limite de usos"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -649,6 +647,15 @@ position = Vector2( 8, -16 )
 texture = ExtResource( 27 )
 id = 3
 item_name = "Modulador"
+
+[node name="Mochila" parent="World" instance=ExtResource( 34 )]
+position = Vector2( 896, -1232 )
+
+[node name="Mochila" parent="World/Mochila" instance=ExtResource( 35 )]
+position = Vector2( 8, -16 )
+texture = ExtResource( 27 )
+id = 4
+item_name = "Mochila"
 
 [node name="DriveThru" parent="World" instance=ExtResource( 15 )]
 position = Vector2( -208.249, 513.429 )

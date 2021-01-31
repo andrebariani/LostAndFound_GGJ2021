@@ -13,7 +13,6 @@
 [ext_resource path="res://player/GrabRangeTool.gd" type="Script" id=11]
 [ext_resource path="res://Items/Ferramenta.tscn" type="PackedScene" id=12]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 20 )
 
