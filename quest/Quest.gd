@@ -77,7 +77,7 @@ func _ready():
 
 func _process(delta):
 	emit_signal( "update_rotation", 
-		player.position.angle_to_point(locations[active_quests[-1]]) )
+		rad2deg(player.position.angle_to_point(locations[active_quests[0]])) )
 
 
 func new_quest():
