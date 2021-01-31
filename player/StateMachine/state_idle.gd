@@ -23,7 +23,7 @@ func run(_delta):
 	if p.inputs.dash:
 		p.cooldowns.dash.value = 0
 		stateMachine.change_state("Dash")
-	elif p.input_dir_vector.x != 0:
+	elif p.input_dir_vector.x != 0 and:
 		stateMachine.change_state("Move")
 	elif p.inputs.jump_jp:
 		p.velocity_jump = -p.max_jump

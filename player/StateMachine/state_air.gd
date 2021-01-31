@@ -26,6 +26,9 @@ func run(_delta):
 	if p.inputs.jump_jp:
 		if p.cooldowns.coyote.value < p.cooldowns.coyote.max_value:
 			p.velocity_jump = -p.max_jump
+		elif p.multijump != 0:
+			p.velocity_jump = -p.max_jump
+			p.multijump -= 1
 	
 	if p.inputs.jump_jr:
 		if(p.velocity_jump  < p.min_jump*-1):
@@ -44,4 +47,8 @@ func run(_delta):
 		stateMachine.change_state("Walljump")
 	elif p.is_on_floor():
 		p.velocity_jump = 0
-		stateMachine.change_state("Idle")
+		p.multijump = p.max_multijump
+		if p.velocity_move == 0:
+			stateMachine.change_state("Idle")
+		else:
+			stateMachine.change_state("Move")

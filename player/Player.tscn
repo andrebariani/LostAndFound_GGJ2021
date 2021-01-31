@@ -27,7 +27,7 @@ MAX_JUMP = 1100
 MIN_JUMP = 500
 AIR_ACC = 75
 GRAVITY = 45
-START_GRAVITY_DIR = 2
+START_GRAVITY_DIR = 1
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -132,6 +132,8 @@ one_shot = true
 
 [node name="space_background" type="Sprite" parent="ParallaxBackground"]
 centered = false
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]
