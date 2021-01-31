@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://quest/Retangulo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/dialog_font.tres" type="DynamicFont" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://quest/Ending.gd" type="Script" id=10]
 [ext_resource path="res://quest/Pause.gd" type="Script" id=11]
 [ext_resource path="res://quest/GameUI.gd" type="Script" id=12]
+[ext_resource path="res://assets/seta.png" type="Texture" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_dialog"
@@ -456,7 +457,6 @@ __meta__ = {
 }
 
 [node name="Pedidos" parent="GameUI" instance=ExtResource( 1 )]
-modulate = Color( 1, 1, 1, 0 )
 margin_left = -496.965
 margin_top = 19.0871
 margin_right = -460.965
@@ -476,7 +476,6 @@ __meta__ = {
 }
 
 [node name="O2" type="Label" parent="GameUI"]
-modulate = Color( 1, 1, 1, 0 )
 margin_left = 18.479
 margin_top = 547.585
 margin_right = 50.479
@@ -587,6 +586,17 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameUI"]
 anims/hide = SubResource( 8 )
 anims/show = SubResource( 9 )
+
+[node name="Seta" type="TextureRect" parent="GameUI"]
+margin_left = 952.0
+margin_top = 504.0
+margin_right = 968.0
+margin_bottom = 520.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="dialogo_terminado" from="DialogController" to="." method="_on_DialogController_dialogo_terminado"]
 [connection signal="animation_finished" from="DialogController/AnimationPlayer" to="DialogController" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DialogController/TextScroll" to="DialogController" method="_on_TextScroll_timeout"]

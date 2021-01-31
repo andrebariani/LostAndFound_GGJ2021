@@ -2,6 +2,7 @@ extends Node
 
 export var items = []
 export var clients = []
+export var locations = []
 export(NodePath) var player
 var dialog
 
@@ -12,6 +13,7 @@ var received = 0
 var content = 0
 var active_quests = []
 
+signal update_rotation
 signal change_sprite
 signal new_pedido
 signal delete_pedido
@@ -23,6 +25,8 @@ signal endgame
 
 func _ready():
 	player = get_node(player)
+	for i in range(len(locations)):
+		locations[i] = get_node(locations[i]).position
 	
 	dialog = [
 		[("Aí, filho, o moço trouxe a Suketa. Agora, bebe e fica quietinho, ok?!"), 
@@ -71,6 +75,11 @@ func _ready():
 	new_quest()
 
 
+func _process(delta):
+	emit_signal( "update_rotation", 
+		player.position.angle_to_point(locations[active_quests[-1]]) )
+
+
 func new_quest():
 	if active_quests.size() >= 3 or current_obj >= 8:
 		return
@@ -109,7 +118,7 @@ func finalize_order():
 	elif active_quests.empty():
 		new_quest()
 	else:
-		emit_signal("change_sprite", active_quests[-1])
+		emit_signal("change_sprite", clients[active_quests[-1]])
 
 
 func endgame():
