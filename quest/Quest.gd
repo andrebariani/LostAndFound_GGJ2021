@@ -1,6 +1,6 @@
 extends Node
 
-var spawn_points = []
+export var items = []
 export var clients = []
 export(NodePath) var player
 var dialog
