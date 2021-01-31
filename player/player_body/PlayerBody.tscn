@@ -1,78 +1,137 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://player/player_body/PlayerBody.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/player_placeholder.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/player/player_body_parts.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/caixa.png" type="Texture" id=4]
 
-[sub_resource type="AnimationNodeAdd2" id=1]
+[sub_resource type="AnimationNodeAdd2" id=23]
 
-[sub_resource type="AnimationNodeAnimation" id=2]
-animation = "arm_idle"
-
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "arm_walk"
-
-[sub_resource type="AnimationNodeAnimation" id=4]
-animation = "arm_wall"
-
-[sub_resource type="AnimationNodeBlend3" id=5]
-
-[sub_resource type="AnimationNodeBlend2" id=6]
-
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "arm_hold"
 
-[sub_resource type="AnimationNodeBlendTree" id=8]
-graph_offset = Vector2( -692.426, -25.25 )
-nodes/ArmIdle/node = SubResource( 2 )
-nodes/ArmIdle/position = Vector2( -480, 60 )
-nodes/ArmWalk/node = SubResource( 3 )
-nodes/ArmWalk/position = Vector2( -480, 180 )
-nodes/ArmWall/node = SubResource( 4 )
-nodes/ArmWall/position = Vector2( -480, -60 )
-nodes/BlendArms/node = SubResource( 5 )
-nodes/BlendArms/position = Vector2( -240, 20 )
-nodes/BlendHold/node = SubResource( 6 )
-nodes/BlendHold/position = Vector2( 40, 160 )
-nodes/Hold/node = SubResource( 7 )
-nodes/Hold/position = Vector2( -240, 360 )
-node_connections = [ "output", 0, "BlendHold", "BlendHold", 0, "BlendArms", "BlendHold", 1, "Hold", "BlendArms", 0, "ArmWall", "BlendArms", 1, "ArmIdle", "BlendArms", 2, "ArmWalk" ]
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "arm_idle"
 
-[sub_resource type="AnimationNodeBlend3" id=9]
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "arm_walk"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "arm_wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+advance_condition = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+advance_condition = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+advance_condition = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+advance_condition = "hold"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+advance_condition = "hold"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+advance_condition = "hold"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+advance_condition = "idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+advance_condition = "wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+advance_condition = "idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+advance_condition = "wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+advance_condition = "wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+advance_condition = "idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=40]
+states/arm_hold/node = SubResource( 24 )
+states/arm_hold/position = Vector2( 545, 433 )
+states/arm_idle/node = SubResource( 25 )
+states/arm_idle/position = Vector2( 348, 281 )
+states/arm_walk/node = SubResource( 26 )
+states/arm_walk/position = Vector2( 545, 620 )
+states/arm_wall/node = SubResource( 27 )
+states/arm_wall/position = Vector2( 767, 281 )
+transitions = [ "arm_hold", "arm_walk", SubResource( 28 ), "arm_wall", "arm_walk", SubResource( 29 ), "arm_idle", "arm_walk", SubResource( 30 ), "arm_idle", "arm_hold", SubResource( 31 ), "arm_wall", "arm_hold", SubResource( 32 ), "arm_walk", "arm_hold", SubResource( 33 ), "arm_hold", "arm_idle", SubResource( 34 ), "arm_hold", "arm_wall", SubResource( 35 ), "arm_wall", "arm_idle", SubResource( 36 ), "arm_idle", "arm_wall", SubResource( 37 ), "arm_walk", "arm_wall", SubResource( 38 ), "arm_walk", "arm_idle", SubResource( 39 ) ]
+start_node = "arm_idle"
+
+[sub_resource type="AnimationNodeBlendTree" id=41]
+graph_offset = Vector2( 0, 249.5 )
+nodes/StateMachine/node = SubResource( 40 )
+nodes/StateMachine/position = Vector2( 520, 320 )
+nodes/output/position = Vector2( 880, 320 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeAnimation" id=42]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=43]
 animation = "walk"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=44]
 animation = "wall"
 
-[sub_resource type="AnimationNodeBlendTree" id=13]
-graph_offset = Vector2( -522.852, 127 )
-nodes/BlendLegs/node = SubResource( 9 )
-nodes/BlendLegs/position = Vector2( 40, 160 )
-nodes/Idle/node = SubResource( 10 )
-nodes/Idle/position = Vector2( -240, 220 )
-nodes/Walk/node = SubResource( 11 )
-nodes/Walk/position = Vector2( -240, 360 )
-nodes/Wall/node = SubResource( 12 )
-nodes/Wall/position = Vector2( -240, 80 )
-nodes/output/position = Vector2( 300, 160 )
-node_connections = [ "output", 0, "BlendLegs", "BlendLegs", 0, "Wall", "BlendLegs", 1, "Idle", "BlendLegs", 2, "Walk" ]
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+advance_condition = "wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+advance_condition = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+advance_condition = "idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+advance_condition = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+advance_condition = "wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+advance_condition = "idle"
+
+[sub_resource type="AnimationNodeStateMachine" id=51]
+states/idle/node = SubResource( 42 )
+states/idle/position = Vector2( 500, 436 )
+states/walk/node = SubResource( 43 )
+states/walk/position = Vector2( 351, 244 )
+states/wall/node = SubResource( 44 )
+states/wall/position = Vector2( 628, 244 )
+transitions = [ "walk", "wall", SubResource( 45 ), "wall", "walk", SubResource( 46 ), "walk", "idle", SubResource( 47 ), "idle", "walk", SubResource( 48 ), "idle", "wall", SubResource( 49 ), "wall", "idle", SubResource( 50 ) ]
+start_node = "walk"
+
+[sub_resource type="AnimationNodeBlendTree" id=52]
+graph_offset = Vector2( 0, -159 )
+nodes/StateMachine/node = SubResource( 51 )
+nodes/StateMachine/position = Vector2( 380, 320 )
+nodes/output/position = Vector2( 760, 320 )
+node_connections = [ "output", 0, "StateMachine" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=14]
-graph_offset = Vector2( -216.965, -117.5 )
-nodes/AddLegsArms/node = SubResource( 1 )
-nodes/AddLegsArms/position = Vector2( 660, -80 )
-nodes/Arms/node = SubResource( 8 )
-nodes/Arms/position = Vector2( 400, 40 )
-nodes/Legs/node = SubResource( 13 )
-nodes/Legs/position = Vector2( 400, -120 )
-nodes/output/position = Vector2( 880, -80 )
-node_connections = [ "output", 0, "AddLegsArms", "AddLegsArms", 0, "Legs", "AddLegsArms", 1, "Arms" ]
+graph_offset = Vector2( 115.361, 0 )
+nodes/Add2/node = SubResource( 23 )
+nodes/Add2/position = Vector2( 920, -100 )
+nodes/Arms/node = SubResource( 41 )
+nodes/Arms/position = Vector2( 560, 80 )
+nodes/Legs/node = SubResource( 52 )
+nodes/Legs/position = Vector2( 560, -120 )
+nodes/output/position = Vector2( 1220, -120 )
+node_connections = [ "output", 0, "Add2", "Add2", 0, "Legs", "Add2", 1, "Arms" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=53]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
 [sub_resource type="Animation" id=15]
 loop = true
@@ -683,10 +742,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ -15.0, -15.0 ]
+"values": [ 30.0, 15.0, 30.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimationRoot/Torso/ShoulderR/Arm:position")
@@ -734,7 +793,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 5.0, 0.0 ]
+"values": [ 150.0, 165.0, 150.0 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("AnimationRoot/Torso/ShoulderR/Arm/Elbow:position")
@@ -758,7 +817,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ -15.0, -10.0, -15.0 ]
+"values": [ 0.0, 0.0, 0.0 ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("AnimationRoot/Torso/ShoulderL:position")
@@ -779,10 +838,10 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0.0, 0.0 ]
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 75.0, 90.0 ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("AnimationRoot/Torso/ShoulderL/Arm/Elbow/Forearm:position")
@@ -803,10 +862,10 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ -15.0, -15.0 ]
+"values": [ 30.0, 45.0, 30.0 ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("AnimationRoot/Torso/ShoulderL/Arm:position")
@@ -854,7 +913,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ -15.0, -15.0 ]
+"values": [ 15.0, 15.0 ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -1935,10 +1994,16 @@ script = ExtResource( 1 )
 tree_root = SubResource( 14 )
 anim_player = NodePath("../BodyAnimationPlayer")
 active = true
-parameters/AddLegsArms/add_amount = 1.0
-parameters/Arms/BlendArms/blend_amount = 0.0
-parameters/Arms/BlendHold/blend_amount = 0.0
-parameters/Legs/BlendLegs/blend_amount = 0.0
+parameters/Add2/add_amount = 1.0
+parameters/Arms/StateMachine/playback = SubResource( 53 )
+parameters/Arms/StateMachine/conditions/hold = false
+parameters/Arms/StateMachine/conditions/idle = false
+parameters/Arms/StateMachine/conditions/walk = false
+parameters/Arms/StateMachine/conditions/wall = false
+parameters/Legs/StateMachine/playback = SubResource( 54 )
+parameters/Legs/StateMachine/conditions/idle = false
+parameters/Legs/StateMachine/conditions/walk = false
+parameters/Legs/StateMachine/conditions/wall = false
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/arm_hold = SubResource( 15 )
@@ -1954,7 +2019,7 @@ anims/wall = SubResource( 22 )
 
 [node name="Torso" type="Sprite" parent="AnimationRoot"]
 self_modulate = Color( 1, 0.517647, 0.517647, 1 )
-position = Vector2( -1, -6.81321 )
+position = Vector2( -1, -5.62588 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, 6 )
 region_enabled = true
@@ -1962,7 +2027,7 @@ region_rect = Rect2( 2, 5, 15, 15 )
 
 [node name="ShoulderL" type="Position2D" parent="AnimationRoot/Torso"]
 show_behind_parent = true
-position = Vector2( -5, 1.92183 )
+position = Vector2( -5, 1.96147 )
 
 [node name="Arm" type="Sprite" parent="AnimationRoot/Torso/ShoulderL"]
 texture = ExtResource( 3 )
@@ -1987,21 +2052,21 @@ region_rect = Rect2( 22, 57, 6, 10 )
 
 [node name="Neck" type="Sprite" parent="AnimationRoot/Torso"]
 show_behind_parent = true
-position = Vector2( 0, -0.598899 )
+position = Vector2( 0, -0.5 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -3 )
 region_enabled = true
 region_rect = Rect2( 27, 21, 11, 6 )
 
 [node name="Head" type="Sprite" parent="AnimationRoot/Torso/Neck"]
-position = Vector2( 0, -8.57615 )
+position = Vector2( 0, -8.20863 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 23, 5, 11, 12 )
 
 [node name="Belly" type="Sprite" parent="AnimationRoot/Torso"]
 show_behind_parent = true
-position = Vector2( 0, 14.9066 )
+position = Vector2( 0, 15.5 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -3 )
 region_enabled = true
@@ -2015,21 +2080,24 @@ region_enabled = true
 region_rect = Rect2( 4, 29, 10, 4 )
 
 [node name="ThighR" type="Sprite" parent="AnimationRoot/Torso/Belly/Hip"]
-position = Vector2( 3.5, 1.5 )
+position = Vector2( 2.5, 1.5 )
+rotation = -0.261799
 texture = ExtResource( 3 )
 offset = Vector2( 0, 2 )
 region_enabled = true
 region_rect = Rect2( 33, 65, 5, 7 )
 
 [node name="Knee" type="Sprite" parent="AnimationRoot/Torso/Belly/Hip/ThighR"]
-position = Vector2( -0.5, 6.5 )
+position = Vector2( -1, 5.5 )
+rotation = -0.414362
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 24, 78, 4, 4 )
 
 [node name="Leg" type="Sprite" parent="AnimationRoot/Torso/Belly/Hip/ThighR/Knee"]
 show_behind_parent = true
-position = Vector2( 0.5, 1.4066 )
+position = Vector2( 1, 1 )
+rotation = -0.73078
 texture = ExtResource( 3 )
 offset = Vector2( -1, 3 )
 region_enabled = true
@@ -2037,28 +2105,31 @@ region_rect = Rect2( 31, 85, 7, 10 )
 
 [node name="ThighL" type="Sprite" parent="AnimationRoot/Torso/Belly/Hip"]
 show_behind_parent = true
-position = Vector2( -2.5, 1.5 )
+position = Vector2( -2.5, 2.5 )
+rotation = 0.316418
 texture = ExtResource( 3 )
 offset = Vector2( 0, 2 )
 region_enabled = true
 region_rect = Rect2( 33, 65, 5, 7 )
 
 [node name="Knee" type="Sprite" parent="AnimationRoot/Torso/Belly/Hip/ThighL"]
-position = Vector2( -0.5, 6.5 )
+position = Vector2( -0.5, 4.52156 )
+rotation = -0.261799
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 24, 78, 4, 4 )
 
 [node name="Leg" type="Sprite" parent="AnimationRoot/Torso/Belly/Hip/ThighL/Knee"]
 show_behind_parent = true
-position = Vector2( 0.5, 1.4066 )
+position = Vector2( 0.5, 1.20863 )
+rotation = -0.468981
 texture = ExtResource( 3 )
 offset = Vector2( -1, 3 )
 region_enabled = true
 region_rect = Rect2( 31, 85, 7, 10 )
 
 [node name="ShoulderR" type="Position2D" parent="AnimationRoot/Torso"]
-position = Vector2( 7, 1.8978 )
+position = Vector2( 7, 1.94173 )
 
 [node name="Arm" type="Sprite" parent="AnimationRoot/Torso/ShoulderR"]
 texture = ExtResource( 3 )
