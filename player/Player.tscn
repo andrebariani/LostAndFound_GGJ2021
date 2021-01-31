@@ -135,6 +135,8 @@ one_shot = true
 centered = false
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="ParticlesContainer" type="Node" parent="."]
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]

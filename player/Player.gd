@@ -339,4 +339,4 @@ func _show_collision_particles():
 			if collision.get_travel().length_squared() < 2:
 				var new_par = par.instance()
 				new_par.set_global_position(collision.position)
-				$Node.add_child(new_par)
+				$ParticlesContainer.add_child(new_par)
