@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=2]
@@ -46,6 +46,8 @@
 [ext_resource path="res://assets/images/tools/jetpack.png" type="Texture" id=44]
 [ext_resource path="res://assets/tileset/janela.png" type="Texture" id=45]
 [ext_resource path="res://objects/Lava.tscn" type="PackedScene" id=46]
+[ext_resource path="res://assets/sons/GGJ_2021.ogg" type="AudioStream" id=47]
+[ext_resource path="res://assets/sons/sfx/item_delivered.wav" type="AudioStream" id=48]
 
 [sub_resource type="TileSet" id=1]
 0/name = "spaceship_tileset.png 0"
@@ -1147,6 +1149,15 @@ item_name = "Mochila"
 
 [node name="DriveThru" parent="World" instance=ExtResource( 15 )]
 position = Vector2( -208.249, 513.429 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="World/DriveThru"]
+stream = ExtResource( 48 )
+volume_db = 5.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 47 )
+autoplay = true
+bus = "New Bus"
 [connection signal="change_sprite" from="Quest" to="World/DriveThru" method="_on_Quest_change_sprite"]
 [connection signal="delete_pedido" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_delete_pedido"]
 [connection signal="endgame" from="Quest" to="CanvasLayer/Interface" method="ending"]
