@@ -641,6 +641,15 @@ texture = ExtResource( 27 )
 id = 2
 item_name = "Tanque"
 
+[node name="Modulador" parent="World/Dispensers" instance=ExtResource( 34 )]
+position = Vector2( 5240, -2704 )
+
+[node name="Modulador" parent="World/Dispensers/Modulador" instance=ExtResource( 35 )]
+position = Vector2( 8, -16 )
+texture = ExtResource( 27 )
+id = 3
+item_name = "Modulador"
+
 [node name="DriveThru" parent="World" instance=ExtResource( 15 )]
 position = Vector2( -208.249, 513.429 )
 [connection signal="change_sprite" from="Quest" to="World/DriveThru" method="_on_Quest_change_sprite"]

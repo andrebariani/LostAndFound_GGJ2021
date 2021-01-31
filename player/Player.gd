@@ -194,6 +194,11 @@ func use_tool():
 				get_tree().call_group("electric", "toggle")
 			2:
 				fill_oxygen()
+			3:
+				if gravity_dir == GRAVITY_DIR.DOWN:
+					gravity_dir = GRAVITY_DIR.UP
+				else:
+					gravity_dir = GRAVITY_DIR.DOWN
 
 
 func update_cooldown():
