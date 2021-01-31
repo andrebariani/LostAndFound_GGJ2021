@@ -40,8 +40,10 @@ func _on_Timer_timeout():
 	if present:
 		position.y += 100000
 		$Timer.start(2)
+		$sfx.play()
 	else:
 		position.y -= 100000
 		$Timer.start(0.5)
+		$sfx.stop()
 	
 	present = !present

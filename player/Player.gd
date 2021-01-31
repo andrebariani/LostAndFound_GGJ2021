@@ -230,9 +230,9 @@ func use_tool():
 				fill_oxygen()
 			3:
 				if gravity_dir == GRAVITY_DIR.DOWN:
-					gravity_dir = GRAVITY_DIR.UP
+					set_gravity(GRAVITY_DIR.UP)
 				else:
-					gravity_dir = GRAVITY_DIR.DOWN
+					set_gravity(GRAVITY_DIR.DOWN)
 			4:
 				multijump = 1
 
@@ -253,25 +253,25 @@ func set_gravity(_grav):
 			GRAVITY_DIR.DOWN:
 				if last_gravity_dir != GRAVITY_DIR.LEFT:
 					ori *= -1
-				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, 0, 0.5,
+				$Tween.interpolate_property(playerBody, "rotation_degrees", playerBody.rotation_degrees, 0, 0.5,
 						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
 				$Tween.start()
 			GRAVITY_DIR.RIGHT:
 				if last_gravity_dir != GRAVITY_DIR.UP:
 					ori *= -1
-				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, -90, 0.5,
+				$Tween.interpolate_property(playerBody, "rotation_degrees", playerBody.rotation_degrees, -90, 0.5,
 						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
 				$Tween.start()
 			GRAVITY_DIR.UP:
 				if last_gravity_dir != GRAVITY_DIR.RIGHT:
 					ori *= -1
-				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, -180, 0.5,
+				$Tween.interpolate_property(playerBody, "rotation_degrees", playerBody.rotation_degrees, -180, 0.5,
 						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
 				$Tween.start()
 			GRAVITY_DIR.LEFT:
 				if last_gravity_dir != GRAVITY_DIR.DOWN:
 					ori *= -1
-				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, 90, 0.5,
+				$Tween.interpolate_property(playerBody, "rotation_degrees", playerBody.rotation_degrees, 90, 0.5,
 						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
 				$Tween.start()
 
@@ -300,6 +300,7 @@ func approach(a, b, amount):
 
 
 func take_damage():
+	sfx_lose.play()
 	breathing = 0
 	damage_taken += 1
 	emit_signal("taken_damage")
