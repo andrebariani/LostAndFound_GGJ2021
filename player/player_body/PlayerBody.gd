@@ -32,3 +32,4 @@ func _switch_animation(animation_name: String, holding: bool):
 
 func _player_info_is_valid() -> bool:
 	return player_node != null and player_node.sm.state_curr != null and player_node.has_method("is_held")
+
