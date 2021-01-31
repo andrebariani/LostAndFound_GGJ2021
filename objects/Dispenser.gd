@@ -12,12 +12,13 @@ onready var item = {
 
 
 func _physics_process(delta):
-	var i = get_tree().get_nodes_in_group("Items")
-	if i:
-		if i.item_name == item.item_name:
-			if i.destroyed:
-				i.queue_free()
-				spawn()
+	if get_tree().get_nodes_in_group(item.item_name).size():
+		var i = get_tree().get_nodes_in_group(item.item_name)[0]
+		if i:
+			if i.item_name == item.item_name:
+				if i.destroyed:
+					i.queue_free()
+					spawn()
 
 func _ready():
 	var i = get_child(2)
@@ -38,8 +39,9 @@ func spawn():
 	
 	
 func force_spawn():
-	var i = get_tree().get_nodes_in_group("Items")
-	if i:
-		if i.item_name == item.item_name:
-			i.queue_free()
-			spawn()
+	if get_tree().get_nodes_in_group(item.item_name).size() != 0:
+		var i = get_tree().get_nodes_in_group(item.item_name)[0]
+		if i:
+			if i.item_name == item.item_name:
+				i.queue_free()
+				spawn()

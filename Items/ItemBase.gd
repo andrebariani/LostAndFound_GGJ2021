@@ -20,7 +20,7 @@ func _ready():
 	sprite.texture = texture
 
 
-func throw():
+func throw(v):
 	pass
 
 
