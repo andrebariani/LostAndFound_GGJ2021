@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/Gate.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/portao1.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/portao2.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 11.5606, 40.151 )
+extents = Vector2( 31.7935, 40.151 )
 
 [node name="Gate" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,8 +25,10 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Upper"]
 position = Vector2( 0, -75 )
+rotation = 1.5708
 scale = Vector2( 1, -1 )
 texture = ExtResource( 2 )
+flip_v = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -44,7 +47,8 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="Lower"]
 position = Vector2( 0, 75 )
-texture = ExtResource( 2 )
+rotation = 1.5708
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }

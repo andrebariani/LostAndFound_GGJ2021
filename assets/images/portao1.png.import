@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spaceship_tileset.png-ddbd83f2e900d67f7486acb9602f7973.stex"
+path="res://.import/portao1.png-121669cb398eca6fb8b9f4e44d7bdff8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tileset/spaceship_tileset.png"
-dest_files=[ "res://.import/spaceship_tileset.png-ddbd83f2e900d67f7486acb9602f7973.stex" ]
+source_file="res://assets/images/portao1.png"
+dest_files=[ "res://.import/portao1.png-121669cb398eca6fb8b9f4e44d7bdff8.stex" ]
 
 [params]
 
