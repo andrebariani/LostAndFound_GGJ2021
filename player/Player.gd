@@ -26,6 +26,7 @@ onready var sm = $States
 onready var inputHelper = $Inputs
 onready var playerBody = $PlayerBody
 onready var grabRange = $PlayerBody/GrabRange
+onready var grabRangeTool = $PlayerBody/GrabRangeTool
 onready var debug = $Debug
 
 
@@ -64,7 +65,8 @@ var inputs = {
 	sprint = 0,
 	dash = 0,
 	grab = 0,
-	drop = 0
+	drop = 0,
+	use = 0
 }
 
 
@@ -100,11 +102,14 @@ onready var checkpoint_pos = position
 
 signal taken_damage
 signal update_oxygen
+signal update_tool
+signal update_item
 
 func _ready():
 	sm.init(self, "Idle")
 	inputHelper.init(self)
 	grabRange.init(self)
+	grabRangeTool.init(self)
 	gravity_dir = START_GRAVITY_DIR
 	
 	if debug_on:
@@ -119,12 +124,26 @@ func _physics_process(delta):
 	sm.run_sm(delta)
 	
 	if inputs.grab:
-		if !grabRange.is_held:
-			grabRange.grab_nearest()
+		var picked_up = false
+		if !grabRangeTool.is_held:
+			if grabRangeTool.grab_nearest():
+				emit_signal("update_tool", grabRangeTool.item.texture)
+				picked_up = true
+			
+		if !picked_up and !grabRange.is_held:
+			if grabRange.grab_nearest():
+				emit_signal("update_item", get_item_id())
 	
-	if inputs.drop:
-		if grabRange.is_held:
+	elif inputs.drop:
+		if grabRangeTool.is_held:
+			grabRangeTool.throw()
+			emit_signal("update_tool", null)
+		elif grabRange.is_held:
 			grabRange.throw()
+			emit_signal("update_item", null)
+	
+	if inputs.use:
+		use_tool()
 	
 	self.apply_velocity(delta)
 	
@@ -134,7 +153,7 @@ func _physics_process(delta):
 		pass
 
 
-func apply_velocity(delta):
+func apply_velocity(_delta):
 	var snaps = [Vector2(0, 16), Vector2(16, 0), Vector2(0, -16), Vector2(-16, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
 
@@ -165,6 +184,17 @@ func apply_velocity(delta):
 		floor_normals[gravity_dir])
 
 
+func use_tool():
+	if is_tool_held():
+		match(get_tool_id()):
+			0:
+				get_tree().call_group("gates", "toggle")
+			1:
+				get_tree().call_group("electric", "toggle")
+			2:
+				fill_oxygen()
+
+
 func update_cooldown():
 	for cd in cooldowns.values():
 		cd.value = min(cd.value + 1, cd.max_value)
@@ -192,8 +222,7 @@ func take_damage():
 	damage_taken += 1
 	emit_signal("taken_damage")
 	if is_held():
-		grabRange.is_held = false
-		item.destroy()
+		grabRange.destroy()
 	else:
 		position = checkpoint_pos
 
@@ -203,6 +232,7 @@ func lose_oxygen():
 		oxygen -= 20
 	else:
 		take_damage()
+		fill_oxygen()
 	emit_signal("update_oxygen", float(oxygen)/float(MAX_OXYGEN))
 
 
@@ -210,8 +240,17 @@ func fill_oxygen():
 	oxygen = MAX_OXYGEN
 	emit_signal("update_oxygen", 1)
 
+func destroy_item():
+	grabRange.destroy()
+
 func is_held():
 	return grabRange.is_held
+
+func is_tool_held():
+	return grabRangeTool.is_held
+
+func get_tool_id():
+	return grabRangeTool.item.id
 
 func get_item_id():
 	return grabRange.item.id

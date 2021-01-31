@@ -2,6 +2,16 @@ extends "res://objects/Damage.gd"
 
 var present = true
 var activated = false
+export(Texture) var sprite
+
+
+func _ready():
+	$Sprite.texture = sprite
+	_on_Timer_timeout()
+
+
+func toggle():
+	set_activated(!activated)
 
 
 func set_activated(a):

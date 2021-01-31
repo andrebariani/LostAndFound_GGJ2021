@@ -26,6 +26,9 @@ func get_inputs():
 	if Input.is_action_just_pressed("drop"):
 		player.inputs.drop = 1
 	
+	if Input.is_action_just_pressed("use_tool"):
+		player.inputs.use = 1
+	
 	if Input.is_action_pressed("ui_accept"):
 		player.inputs.jump_p = 1
 	

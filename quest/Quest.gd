@@ -17,6 +17,7 @@ signal new_pedido
 signal delete_pedido
 signal new_dialog
 signal second_passed
+signal set_item
 signal endgame
 
 
@@ -93,7 +94,7 @@ func receive_order(id):
 	player.has_control = false
 	active_quests.erase(id)
 	
-	if times[id] <= 120:
+	if times[id] <= 180:
 		content += 1
 	received += 1
 
@@ -101,6 +102,7 @@ func receive_order(id):
 func finalize_order():
 	$Timer.start()
 	player.has_control = true
+	player.destroy_item()
 	if received >= 9:
 		endgame()
 	
@@ -109,7 +111,7 @@ func finalize_order():
 
 
 func endgame():
-	var pontuacao = content*60
+	var pontuacao = 500 + content*100
 	pontuacao += 250 - (25*player.get_damage_taken())
 	pontuacao -= total_time
 	
@@ -130,3 +132,10 @@ func _on_Interface_dialogo_terminado():
 
 func _on_DriveThru_received_item(id):
 	receive_order(id)
+
+
+func _on_Player_update_item(id):
+	if id == null:
+		emit_signal("set_item", null)
+	else:
+		emit_signal("set_item", items[id])

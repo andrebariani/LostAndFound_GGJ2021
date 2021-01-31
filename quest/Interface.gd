@@ -19,6 +19,11 @@ func add_pedido(sprite_, id):
 func delete_pedido(id):
 	$QuestDisplay.delete_pedido(id)
 
+func set_ferramenta(_sprite):
+	$GameUI.set_ferramenta(_sprite)
+
+func set_item(_sprite):
+	$GameUI.set_item(_sprite)
 
 func ending(vitoria, vidas, tempo, satisfacao, count, pontuacao):
 	$Ending.activate(vitoria, vidas, tempo, satisfacao, count, pontuacao)
@@ -43,3 +48,10 @@ func _on_Quest_new_dialog(lines):
 
 func _on_Quest_delete_pedido(id):
 	delete_pedido(id)
+
+
+func _on_Player_update_tool(_sprite):
+	set_ferramenta(_sprite)
+
+func _on_Quest_set_item(_sprite):
+	set_item(_sprite)

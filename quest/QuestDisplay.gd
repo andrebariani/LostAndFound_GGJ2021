@@ -14,6 +14,7 @@ func add_pedido(sprite, id):
 	new.setup(sprite, id)
 	for i in range(3):
 		if not i in pedido_positions:
+			pedido_positions.append(i)
 			new.rect_position = Vector2(238, Y_OFFSET*i)
 			break
 	

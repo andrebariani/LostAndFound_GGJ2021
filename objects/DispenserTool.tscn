@@ -1,24 +1,23 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://objects/Dispenser.gd" type="Script" id=1]
+[ext_resource path="res://objects/DispenserTool.gd" type="Script" id=1]
 [ext_resource path="res://objects/Button.gd" type="Script" id=2]
-[ext_resource path="res://assets/itens/sukita.png" type="Texture" id=3]
+[ext_resource path="res://Items/Ferramenta.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="Dispenser" type="Position2D"]
+[node name="DispenserTool" type="Position2D"]
 script = ExtResource( 1 )
+item_base = ExtResource( 3 )
 
 [node name="Button" type="Area2D" parent="."]
-position = Vector2( 88, 0 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 3, 3 )
-texture = ExtResource( 3 )
 [connection signal="body_entered" from="Button" to="Button" method="_on_Button_body_entered"]
 [connection signal="body_exited" from="Button" to="Button" method="_on_Button_body_exited"]
