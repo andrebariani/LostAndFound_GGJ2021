@@ -50,8 +50,6 @@ func invert_direction():
 
 func _on_Area2D_body_entered(body):
 	body_array.append(body)
-	print_debug("ADDED")
 
 func _on_Area2D_body_exited(body):
 	body_array.erase(body)
-	print_debug("ERASED")

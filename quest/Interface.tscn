@@ -588,12 +588,24 @@ anims/hide = SubResource( 8 )
 anims/show = SubResource( 9 )
 
 [node name="Seta" type="TextureRect" parent="GameUI"]
-margin_left = 952.0
-margin_top = 504.0
-margin_right = 968.0
-margin_bottom = 520.0
+margin_left = 944.0
+margin_top = 496.0
+margin_right = 960.0
+margin_bottom = 512.0
 rect_scale = Vector2( 4, 4 )
+rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Obj" type="Label" parent="GameUI"]
+margin_left = 888.0
+margin_top = 552.0
+margin_right = 1016.0
+margin_bottom = 568.0
+custom_fonts/font = ExtResource( 2 )
+text = "OBJETIVO"
 __meta__ = {
 "_edit_use_anchors_": false
 }
