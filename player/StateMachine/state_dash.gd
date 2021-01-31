@@ -17,12 +17,14 @@ func run(_delta):
 	else:
 		p.velocity_move = 0
 	
-	p.velocity_jump = 0
+	if !p.in_space:
+		p.velocity_jump = 0
 	
 	if p.is_on_wall():
 		p.cooldowns.dash.value = p.cooldowns.dash.max_value
 		if p.CAN_WALLJUMP:
-			p.velocity_jump = 0
+			if !p.in_space:
+				p.velocity_jump = 0
 			p.last_velocity_move_sign = sign(p.velocity_move)
 			p.cooldowns.walljump.value = 0
 			stateMachine.change_state("Walljump")

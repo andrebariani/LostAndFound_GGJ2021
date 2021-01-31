@@ -137,9 +137,13 @@ centered = false
 [node name="Tween" type="Tween" parent="."]
 
 [node name="ParticlesContainer" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRangeTool/Timer" to="PlayerBody/GrabRangeTool" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

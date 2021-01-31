@@ -76,7 +76,7 @@ func _ready():
 	new_quest()
 
 
-func _process(delta):
+func _process(_delta):
 	if !active_quests.empty():
 		emit_signal( "update_rotation", 
 			rad2deg(player.position.angle_to_point(locations[active_quests[0]])) )
