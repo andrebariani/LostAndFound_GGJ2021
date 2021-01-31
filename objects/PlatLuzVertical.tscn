@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=1]
+[ext_resource path="res://objects/PlatLuz.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/PlatLuz.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/placa_eletrica.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.2267, 6.31898 )
@@ -19,7 +20,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 4
 format = 1
-tile_data = PoolIntArray( 0, 1, 131072, 1, 1, 131074, 65536, 1, 196608, 65537, 1, 196610, 131072, 1, 196608, 131073, 1, 196610, 196608, 1, 196608, 196609, 1, 196610, 262144, 1, 196608, 262145, 1, 196610, 327680, 1, 196608, 327681, 1, 196610, 393216, 1, 196608, 393217, 1, 196610, 458752, 1, 196608, 458753, 1, 196610, 524288, 1, 262144, 524289, 1, 262146 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 65536, 0, 65536, 65537, 0, 65538, 131072, 0, 65536, 131073, 0, 65538, 196608, 0, 65536, 196609, 0, 65538, 262144, 0, 65536, 262145, 0, 65538, 327680, 0, 65536, 327681, 0, 65538, 393216, 0, 65536, 393217, 0, 65538, 458752, 0, 65536, 458753, 0, 65538, 524288, 0, 131072, 524289, 0, 131074 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
@@ -37,6 +38,10 @@ one_shot = true
 
 [node name="Grace" type="Timer" parent="."]
 one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 32, 144 )
+texture = ExtResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Grace" to="." method="_on_Grace_timeout"]
