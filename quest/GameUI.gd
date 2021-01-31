@@ -23,6 +23,7 @@ func update_oxigenio(porcentagem):
 		$AnimationPlayer.play("hide")
 	elif $O2.modulate.a == 0:
 		$AnimationPlayer.play("show")
+		$sfx_o2.play()
 	
 	$Pedidos/Meter.rect_size = Vector2(30, ox_max*porcentagem)
 	$Pedidos/Meter.rect_position = Vector2(3, 3 + ox_max*(1-porcentagem) )

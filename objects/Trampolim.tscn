@@ -2,7 +2,11 @@
 
 [ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/Trampolim.gd" type="Script" id=2]
+<<<<<<< HEAD
 [ext_resource path="res://assets/images/trampolim.png" type="Texture" id=3]
+=======
+[ext_resource path="res://assets/images/placa_eletrica.png" type="Texture" id=3]
+>>>>>>> 53bb8cffdbda9fc72148faebf40cc6038a7243c4
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 73.0875, 6.31898 )
@@ -27,7 +31,19 @@ position = Vector2( 78.0575, -3.12787 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+<<<<<<< HEAD
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 centered = false
+=======
+position = Vector2( 80, 32 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+>>>>>>> 53bb8cffdbda9fc72148faebf40cc6038a7243c4
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

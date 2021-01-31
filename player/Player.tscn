@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -12,6 +12,12 @@
 [ext_resource path="res://player/GrabRange.gd" type="Script" id=10]
 [ext_resource path="res://player/GrabRangeTool.gd" type="Script" id=11]
 [ext_resource path="res://Items/Ferramenta.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sons/sfx/dash.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sons/sfx/lose.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sons/sfx/throw.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sons/sfx/jump.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sons/sfx/use.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/sons/sfx/pick.wav" type="AudioStream" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 20 )
@@ -140,6 +146,32 @@ centered = false
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Sfx" type="Node2D" parent="."]
+
+[node name="jump" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 16 )
+volume_db = 5.0
+
+[node name="dash" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 13 )
+volume_db = 5.0
+
+[node name="lose" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 14 )
+volume_db = 5.0
+
+[node name="pick" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 18 )
+volume_db = 10.0
+
+[node name="throw" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 15 )
+volume_db = 10.0
+
+[node name="use" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource( 17 )
+volume_db = 10.0
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]
