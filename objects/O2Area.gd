@@ -7,7 +7,7 @@ func _on_Area2D_body_entered(body):
 	if body.has_method("lose_oxygen"):
 		player = body
 		$Timer.start(0.25)
-		player.timer_setop()
+		player.timer_setup()
 
 
 func _on_Area2D_body_exited(body):
