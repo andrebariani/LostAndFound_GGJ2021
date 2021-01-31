@@ -95,7 +95,9 @@ var cooldowns = {
 var damage_taken = 0
 var oxygen = MAX_OXYGEN
 var breathing = 0
+
 var hyperjump = 0
+var in_space = false
 
 var ferramenta = null
 
@@ -176,22 +178,29 @@ func apply_velocity(_delta):
 	else:
 		change_ori(sign(input_dir_vector.x))
 
-	if gravity_on:
+	if gravity_on and !in_space:
 		velocity_jump = approach(velocity_jump, air_final_speed, gravity)
 	
-	match gravity_dir:
-		GRAVITY_DIR.DOWN:
-			velocity.x = velocity_move
-			velocity.y = velocity_jump
-		GRAVITY_DIR.RIGHT:
-			velocity.y = velocity_move
-			velocity.x = velocity_jump
-		GRAVITY_DIR.UP:
-			velocity.x = velocity_move
-			velocity.y =  -velocity_jump
-		GRAVITY_DIR.LEFT:
-			velocity.y = velocity_move
-			velocity.x = -velocity_jump
+	if !in_space:
+		match gravity_dir:
+			GRAVITY_DIR.DOWN:
+				velocity.x = velocity_move
+				velocity.y = velocity_jump
+			GRAVITY_DIR.RIGHT:
+				velocity.y = velocity_move
+				velocity.x = velocity_jump
+			GRAVITY_DIR.UP:
+				velocity.x = velocity_move
+				velocity.y =  -velocity_jump
+			GRAVITY_DIR.LEFT:
+				velocity.y = velocity_move
+				velocity.x = -velocity_jump
+	elif sm.state_curr == "Move" or sm.state_curr == "Air":
+		velocity.x = velocity_move
+		velocity.y = velocity_jump + (input_dir_vector.y*max_speed)/4
+	elif sm.state_curr != "Idle":
+		velocity.x += velocity_move*0.1
+		velocity.y += velocity_jump*0.1 + gravity*0.05
 	
 	velocity = move_and_slide_with_snap(velocity, snaps[gravity_dir], \
 		floor_normals[gravity_dir])
@@ -227,8 +236,6 @@ func set_gravity(_grav):
 	if _grav != gravity_dir:
 		last_gravity_dir = gravity_dir
 		gravity_dir = _grav
-		
-		# jump_velocity = 0
 		
 		match gravity_dir:
 			GRAVITY_DIR.DOWN:
@@ -290,18 +297,36 @@ func take_damage():
 		position = checkpoint_pos
 
 
+func timer_setup():
+	$Timer.stop()
+	$Timer.start(0.45)
+
 func lose_oxygen():
-	if oxygen > 20:
-		oxygen -= 20
+	if oxygen > 5:
+		oxygen -= 5
+		timer_setup()
 	else:
 		take_damage()
 		fill_oxygen()
+		set_in_space(false)
 	emit_signal("update_oxygen", float(oxygen)/float(MAX_OXYGEN))
 
+func _on_Timer_timeout():
+	print_debug("teste")
+	fill_oxygen()
+	set_in_space(false)
 
 func fill_oxygen():
 	oxygen = MAX_OXYGEN
 	emit_signal("update_oxygen", 1)
+
+func set_in_space(a):
+	in_space = a
+	if in_space:
+		air_final_speed = 10
+	else:
+		air_final_speed = AIR_FINAL_SPEED
+
 
 func destroy_item():
 	grabRange.destroy()
