@@ -9,7 +9,7 @@ func _on_Area2D_body_entered(body):
 		$Timer.start(0.25)
 		player.timer_setup()
 		if spaceEffect:
-			spaceEffect.cutoff_hz = 1500
+			spaceEffect.cutoff_hz = 2000
 
 	elif body.has_method("throw"):
 		body.weight = 0
