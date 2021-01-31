@@ -226,7 +226,7 @@ margin_top = -47.1454
 margin_right = 240.622
 margin_bottom = -9.14543
 custom_fonts/font = SubResource( 2 )
-text = "3/8"
+text = "0/8"
 align = 2
 __meta__ = {
 "_edit_lock_": true,
@@ -448,7 +448,6 @@ __meta__ = {
 anims/pause = SubResource( 7 )
 
 [node name="GameUI" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 12 )
@@ -457,6 +456,7 @@ __meta__ = {
 }
 
 [node name="Pedidos" parent="GameUI" instance=ExtResource( 1 )]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = -496.965
 margin_top = 19.0871
 margin_right = -460.965
@@ -476,6 +476,7 @@ __meta__ = {
 }
 
 [node name="O2" type="Label" parent="GameUI"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 18.479
 margin_top = 547.585
 margin_right = 50.479
@@ -552,33 +553,33 @@ __meta__ = {
 }
 
 [node name="QuadroFerramenta" parent="GameUI" instance=ExtResource( 1 )]
-margin_left = -496.0
-margin_top = -272.0
-margin_right = -432.0
-margin_bottom = -208.0
+margin_left = -504.0
+margin_top = -280.0
+margin_right = -424.0
+margin_bottom = -200.0
 
 [node name="Ferramenta" type="TextureRect" parent="GameUI"]
-margin_left = 16.0018
-margin_top = 16.8877
-margin_right = 80.0018
-margin_bottom = 80.8877
-texture = ExtResource( 9 )
+margin_left = 16.0
+margin_top = 17.0
+margin_right = 32.0
+margin_bottom = 33.0
+rect_scale = Vector2( 4, 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="QuadroItem" parent="GameUI" instance=ExtResource( 1 )]
 margin_left = -416.0
-margin_top = -272.0
-margin_right = -352.0
-margin_bottom = -208.0
+margin_top = -280.0
+margin_right = -336.0
+margin_bottom = -200.0
 
 [node name="Item" type="TextureRect" parent="GameUI"]
-margin_left = 96.2027
-margin_top = 16.8877
-margin_right = 160.203
-margin_bottom = 80.8877
-texture = ExtResource( 9 )
+margin_left = 104.0
+margin_top = 16.0
+margin_right = 120.0
+margin_bottom = 32.0
+rect_scale = Vector2( 4, 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

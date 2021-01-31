@@ -1,6 +1,6 @@
 extends Node
 
-var spawn_points = []
+export var items = []
 export var clients = []
 export(NodePath) var player
 var dialog
@@ -13,8 +13,11 @@ var content = 0
 var active_quests = []
 
 signal change_sprite
+signal new_pedido
+signal delete_pedido
 signal new_dialog
 signal second_passed
+signal set_item
 signal endgame
 
 
@@ -64,6 +67,8 @@ func _ready():
 		"Eita, perdi meu horário. Tenho que ir indo, vou fazer crossfit com uma galera.",
 		"Falou, cara."],
 	]
+	
+	new_quest()
 
 
 func new_quest():
@@ -73,36 +78,45 @@ func new_quest():
 	times.append(0)
 	active_quests.append(current_obj)
 	emit_signal("change_sprite", clients[current_obj])
+	emit_signal("new_pedido", items[current_obj], current_obj)
 	current_obj += 1
 
 
 func receive_order(id):
-	if id in active_quests:
-		emit_signal("change_sprite", clients[id])
-		emit_signal("new_dialog", dialog[id])
-		$Timer.stop()
-		player.has_control = false
-		active_quests.erase(id)
+	if not id in active_quests:
+		return
+		
+	emit_signal("change_sprite", clients[id])
+	emit_signal("new_dialog", dialog[id])
+	emit_signal("delete_pedido", id)
 	
-	if times[id] <= 120:
+	$Timer.stop()
+	player.has_control = false
+	active_quests.erase(id)
+	
+	if times[id] <= 180:
 		content += 1
 	received += 1
-	emit_signal("change_sprite", clients[current_obj])
 
 
 func finalize_order():
 	$Timer.start()
 	player.has_control = true
+	player.destroy_item()
 	if received >= 9:
 		endgame()
+	
+	elif active_quests.empty():
+		new_quest()
 
 
 func endgame():
-	var pontuacao = content*60
+	var pontuacao = 500 + content*100
+	pontuacao += 250 - (25*player.get_damage_taken())
 	pontuacao -= total_time
 	
 	#vitoria, vidas, tempo, satisfacao, count, pontuacao
-	emit_signal("endgame", true, 0, total_time, content, 9, pontuacao)
+	emit_signal("endgame", true, player.get_damage_taken(), total_time, content, 9, pontuacao)
 
 
 func _on_Timer_timeout():
@@ -110,3 +124,18 @@ func _on_Timer_timeout():
 		times[i] += 1
 	total_time += 1
 	emit_signal("second_passed")
+
+
+func _on_Interface_dialogo_terminado():
+	finalize_order()
+
+
+func _on_DriveThru_received_item(id):
+	receive_order(id)
+
+
+func _on_Player_update_item(id):
+	if id == null:
+		emit_signal("set_item", null)
+	else:
+		emit_signal("set_item", items[id])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://player/StateMachine/state_walljump.gd" type="Script" id=8]
 [ext_resource path="res://player/player_body/PlayerBody.tscn" type="PackedScene" id=9]
 [ext_resource path="res://player/GrabRange.gd" type="Script" id=10]
+[ext_resource path="res://player/GrabRangeTool.gd" type="Script" id=11]
+[ext_resource path="res://Items/Ferramenta.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 20 )
@@ -24,7 +26,7 @@ MAX_JUMP = 1100
 MIN_JUMP = 500
 AIR_ACC = 75
 GRAVITY = 45
-START_GRAVITY_DIR = 2
+START_GRAVITY_DIR = 1
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -84,6 +86,8 @@ current = true
 [node name="GrabRange" type="Area2D" parent="PlayerBody"]
 rotation = 3.14159
 scale = Vector2( 1, -1 )
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="ItemPlace" type="Position2D" parent="PlayerBody/GrabRange"]
@@ -100,10 +104,38 @@ shape = SubResource( 2 )
 wait_time = 0.5
 one_shot = true
 
+[node name="GrabRangeTool" type="Area2D" parent="PlayerBody"]
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 11 )
+item_base = ExtResource( 12 )
+
+[node name="ItemPlace" type="Position2D" parent="PlayerBody/GrabRangeTool"]
+position = Vector2( 16, 0 )
+
+[node name="Sprite" type="Sprite" parent="PlayerBody/GrabRangeTool/ItemPlace"]
+visible = false
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/GrabRangeTool"]
+position = Vector2( 16, 0 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="PlayerBody/GrabRangeTool"]
+wait_time = 0.5
+one_shot = true
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="space_background" type="Sprite" parent="ParallaxBackground"]
 centered = false
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_body_entered"]
+[connection signal="body_exited" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_body_exited"]
+[connection signal="timeout" from="PlayerBody/GrabRangeTool/Timer" to="PlayerBody/GrabRangeTool" method="_on_Timer_timeout"]

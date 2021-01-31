@@ -8,12 +8,14 @@ func _ready():
 	alvo = get_node(alvo)
 
 
-func _process(delta):
+func _process(_delta):
 	if !activated:
 		return
 	
 	rotation = position.angle_to_point(Vector2(alvo.position))
 
+func toggle():
+	set_activated(!activated)
 
 func set_activated(a):
 	activated = a
@@ -22,8 +24,6 @@ func set_activated(a):
 func _on_Timer_timeout():
 	if !activated:
 		return
-	
-	print_debug(position.distance_to(alvo.position))
 	
 	if position.distance_to(alvo.position) <= 1250:
 		var new = tiro.instance()

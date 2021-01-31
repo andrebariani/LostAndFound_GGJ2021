@@ -21,7 +21,7 @@ func set_health(health):
 func update_oxigenio(porcentagem):
 	if porcentagem == 1:
 		$AnimationPlayer.play("hide")
-	elif modulate.a == 0:
+	elif $O2.modulate.a == 0:
 		$AnimationPlayer.play("show")
 	
 	$Pedidos/Meter.rect_size = Vector2(30, ox_max*porcentagem)

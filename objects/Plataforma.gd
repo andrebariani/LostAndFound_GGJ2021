@@ -36,6 +36,9 @@ func _process(_delta):
 		body.position.y = body.position.y + (velocidade*direcaoy) 
 
 
+func toggle():
+	set_activated(!activated)
+
 func set_activated(new):
 	activated = new
 

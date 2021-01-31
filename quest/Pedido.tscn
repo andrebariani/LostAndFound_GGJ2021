@@ -2,7 +2,7 @@
 
 [ext_resource path="res://quest/Pedido.gd" type="Script" id=1]
 [ext_resource path="res://quest/Retangulo.tscn" type="PackedScene" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/itens/sukita.png" type="Texture" id=3]
 [ext_resource path="res://quest/Relogio.tscn" type="PackedScene" id=4]
 
 [node name="Pedido" type="Control"]
@@ -16,18 +16,19 @@ __meta__ = {
 [node name="Pedidos" parent="." instance=ExtResource( 2 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -64.0
+margin_left = -71.0
 margin_top = 0.0
 margin_right = 0.0
-margin_bottom = 64.0
+margin_bottom = 71.0
 
 [node name="Icon" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -63.9302
-margin_top = -0.307358
-margin_right = 0.0697632
-margin_bottom = 63.6926
+margin_left = -67.7959
+margin_top = 3.50388
+margin_right = -51.7959
+margin_bottom = 19.5039
+rect_scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -35,6 +36,6 @@ __meta__ = {
 
 [node name="Relogio" parent="." instance=ExtResource( 4 )]
 margin_left = -248.0
-margin_top = 17.0
+margin_top = 22.4036
 margin_right = -80.0
-margin_bottom = 84.0
+margin_bottom = 89.4036
