@@ -39,6 +39,7 @@ func run(_delta):
 		p.velocity_move = p.last_velocity_move_sign * -1 * (p.max_speed)
 		p.gravity_on = true
 		p.cooldowns.air_momentum.value = 0
+		p.sfx_jump.play()
 		stateMachine.change_state("Air")
 	elif not p.is_on_wall():
 		p.gravity_on = true

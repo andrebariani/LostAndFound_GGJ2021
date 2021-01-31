@@ -25,6 +25,7 @@ func run(_delta):
 	elif p.inputs.jump_jp:
 		p.velocity_jump = -p.max_jump
 		p.floor_jump = true
+		p.sfx_jump.play()
 		stateMachine.change_state("Air")
 	elif not p.is_on_floor():
 		p.cooldowns.coyote.value = 0
