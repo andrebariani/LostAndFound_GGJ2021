@@ -159,6 +159,7 @@ func _physics_process(delta):
 	
 	self.apply_velocity(delta)
 	
+	_show_collision_particles()
 	if debug_on:
 		debug.get_child(0).set_text(str(velocity))
 		debug.get_child(1).set_text(str(sm.state_curr))
@@ -327,3 +328,14 @@ func get_breathing():
 
 func add_breathing(b):
 	breathing += b
+
+
+func _show_collision_particles():
+	if sm.state_curr != "Idle":
+		var par = load("res://player/player_body/Particles.tscn")
+		for i in range(get_slide_count()):
+			var collision = get_slide_collision(i)
+			if collision.get_travel().length_squared() < 2:
+				var new_par = par.instance()
+				new_par.set_global_position(collision.position)
+				$Node.add_child(new_par)
