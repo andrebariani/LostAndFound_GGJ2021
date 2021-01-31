@@ -53,7 +53,7 @@ var floor_normal = Vector2(0,0)
 
 var input_dir_vector = Vector2(0,0)
 var last_input_dir_vector = Vector2(0,0)
-var last_velocity_move_sign # Used mainly in walljump
+var last_velocity_move_sign # Used mainly in walljumps
 
 
 var inputs = {
