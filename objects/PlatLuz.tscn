@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/tileset/cuidado e plataforma de luz.png" type="Texture" id=1]
 [ext_resource path="res://objects/PlatLuz.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/placa_eletrica.png" type="Texture" id=3]
 
 [sub_resource type="TileSet" id=1]
 0/name = "cuidado e plataforma de luz.png 0"
@@ -21,6 +22,10 @@
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
 
@@ -51,6 +56,10 @@ one_shot = true
 
 [node name="Grace" type="Timer" parent="."]
 one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 128, 32 )
+texture = ExtResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Grace" to="." method="_on_Grace_timeout"]
