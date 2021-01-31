@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/placa_eletrica.png-7a739e032abc2e4200d0a829c97f322a.stex"
+path="res://.import/tiro.png-7e76bc6e8eb09f1ffcfe63b5b583fc9c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/placa_eletrica.png"
-dest_files=[ "res://.import/placa_eletrica.png-7a739e032abc2e4200d0a829c97f322a.stex" ]
+source_file="res://assets/images/tiro.png"
+dest_files=[ "res://.import/tiro.png-7e76bc6e8eb09f1ffcfe63b5b583fc9c.stex" ]
 
 [params]
 

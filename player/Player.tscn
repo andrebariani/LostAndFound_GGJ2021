@@ -61,6 +61,7 @@ position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="Debug" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {

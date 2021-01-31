@@ -109,7 +109,7 @@ var in_space = false
 var ferramenta = null
 
 var has_control = true
-var debug_on = true
+var debug_on = false
 
 var item = null
 onready var checkpoint_pos = position
@@ -325,7 +325,6 @@ func lose_oxygen():
 	emit_signal("update_oxygen", float(oxygen)/float(MAX_OXYGEN))
 
 func _on_Timer_timeout():
-	print_debug("teste")
 	fill_oxygen()
 	set_in_space(false)
 
