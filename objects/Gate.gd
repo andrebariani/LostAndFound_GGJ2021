@@ -42,5 +42,5 @@ func close():
 func _on_CloseUpperGate_area_entered(_area):
 	close()
 
-func _on_OpenGate_area_entered(area):
+func _on_OpenGate_area_entered(_area):
 	open()

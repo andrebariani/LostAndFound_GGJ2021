@@ -8,7 +8,7 @@ func _ready():
 	alvo = get_node(alvo)
 
 
-func _process(delta):
+func _process(_delta):
 	if !activated:
 		return
 	

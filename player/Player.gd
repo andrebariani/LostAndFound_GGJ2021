@@ -19,6 +19,7 @@ export (bool) var CAN_WALLJUMP = true
 export (int) var WALLSLIDE_SPEED = 100
 export (int) var WALLJUMP_FRAMES = 10
 export (int) var AIR_MOMENTUM_FRAMES = 10
+export (int) var MAX_OXYGEN = 100
 
 
 onready var sm = $States
@@ -62,7 +63,8 @@ var inputs = {
 	jump_jr = 0,
 	sprint = 0,
 	dash = 0,
-	grab = 0
+	grab = 0,
+	drop = 0
 }
 
 
@@ -85,15 +87,19 @@ var cooldowns = {
 	},
 }
 
+var damage_taken = 0
+var oxygen = MAX_OXYGEN
+
+var ferramenta = null
 
 var has_control = true
 var debug_on = true
-var is_held = false
 
+var item = null
+onready var checkpoint_pos = position
 
-var item
-var checkpoint_pos
-
+signal taken_damage
+signal update_oxygen
 
 func _ready():
 	sm.init(self, "Idle")
@@ -108,27 +114,26 @@ func _ready():
 func _physics_process(delta):
 	if has_control:
 		inputHelper.get_inputs()
-
+	
 	update_cooldown()
-
 	sm.run_sm(delta)
 	
 	if inputs.grab:
-		if grabRange.is_held:
-			grabRange.throw()
-		else:
+		if !grabRange.is_held:
 			grabRange.grab_nearest()
 	
-	self.apply_velocity(delta)
+	if inputs.drop:
+		if grabRange.is_held:
+			grabRange.throw()
 	
-	self.take_damage()
+	self.apply_velocity(delta)
 	
 	if debug_on:
 		debug.get_child(0).set_text(str(velocity))
 		debug.get_child(1).set_text(str(sm.state_curr))
 		pass
 
-	
+
 func apply_velocity(delta):
 	var snaps = [Vector2(0, 16), Vector2(16, 0), Vector2(0, -16), Vector2(-16, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
@@ -184,4 +189,36 @@ func approach(a, b, amount):
 
 
 func take_damage():
-	pass
+	damage_taken += 1
+	emit_signal("taken_damage")
+	if is_held():
+		grabRange.is_held = false
+		item.destroy()
+	else:
+		position = checkpoint_pos
+
+
+func lose_oxygen():
+	if oxygen > 20:
+		oxygen -= 20
+	else:
+		take_damage()
+	emit_signal("update_oxygen", float(oxygen)/float(MAX_OXYGEN))
+
+
+func fill_oxygen():
+	oxygen = MAX_OXYGEN
+	emit_signal("update_oxygen", 1)
+
+func is_held():
+	return grabRange.is_held
+
+func get_item_id():
+	return grabRange.item.id
+
+func get_damage_taken():
+	return damage_taken
+
+func set_checkpoint(pos):
+	checkpoint_pos = pos
+

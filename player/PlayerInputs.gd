@@ -23,6 +23,9 @@ func get_inputs():
 	if Input.is_action_just_pressed("ui_down"):
 		player.inputs.grab = 1
 	
+	if Input.is_action_just_pressed("drop"):
+		player.inputs.drop = 1
+	
 	if Input.is_action_pressed("ui_accept"):
 		player.inputs.jump_p = 1
 	
@@ -37,4 +40,3 @@ func get_inputs():
 		
 	if Input.is_action_just_pressed("dash") and player.CAN_DASH:
 		player.inputs.dash = 1
-	pass

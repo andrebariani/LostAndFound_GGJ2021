@@ -11,7 +11,7 @@ onready var item = {
 }
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_tree().get_nodes_in_group(item.item_name).size():
 		var i = get_tree().get_nodes_in_group(item.item_name)[0]
 		if i:

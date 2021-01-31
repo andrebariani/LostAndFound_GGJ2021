@@ -23,10 +23,6 @@ func init(_p):
 	p = _p
 
 
-func _physics_process(delta):
-	pass
-
-
 func grab_nearest():
 	if item_in_range:
 		collision.disabled = true

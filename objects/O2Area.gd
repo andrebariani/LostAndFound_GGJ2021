@@ -12,6 +12,7 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	if body.has_method("fill_oxygen"):
 		body.fill_oxygen()
+		player = null
 		$Timer.stop()
 
 

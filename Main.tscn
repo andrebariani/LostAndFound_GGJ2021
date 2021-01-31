@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=2]
@@ -17,6 +17,10 @@
 [ext_resource path="res://quest/DriveThru.tscn" type="PackedScene" id=15]
 [ext_resource path="res://objects/O2Area.tscn" type="PackedScene" id=16]
 [ext_resource path="res://objects/SpaceArea.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Items/ItemBase.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/itens/coxinha.png" type="Texture" id=19]
+[ext_resource path="res://objects/Dispenser.tscn" type="PackedScene" id=20]
+[ext_resource path="res://objects/Spike.tscn" type="PackedScene" id=21]
 
 [sub_resource type="TileSet" id=1]
 0/name = "spaceship_tileset.png 0"
@@ -113,12 +117,12 @@ __meta__ = {
 }
 
 [node name="Item" type="Label" parent="World/Tutorial"]
-margin_left = 1726.95
-margin_top = 429.825
-margin_right = 1870.95
-margin_bottom = 540.825
+margin_left = 1712.0
+margin_top = 424.0
+margin_right = 2000.0
+margin_bottom = 535.0
 custom_fonts/font = ExtResource( 7 )
-text = "E ou X
+text = "S ou Seta p/ Baixo
 Pegar Item
 
 Q ou C
@@ -205,7 +209,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="World" instance=ExtResource( 1 )]
-position = Vector2( -6.51122, 515.109 )
+position = Vector2( 104, 520 )
 collision_mask = 12
 START_GRAVITY_DIR = 0
 
@@ -354,9 +358,85 @@ scale = Vector2( 136, 32 )
 position = Vector2( 3232, -3808 )
 scale = Vector2( 46, 116 )
 
-[node name="Node2D" type="Node2D" parent="World"]
+[node name="Spikes" type="Node2D" parent="World/Objetos"]
+position = Vector2( 8600, -2048 )
+
+[node name="Spike" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+scale = Vector2( 4, 4 )
+
+[node name="Spike2" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 48, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike3" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 96, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike4" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 144, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike5" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 192, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike6" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 240, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike7" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 288, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike8" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 336, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike9" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 384, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike10" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 432, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike11" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 480, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike12" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 528, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Spike13" parent="World/Objetos/Spikes" instance=ExtResource( 21 )]
+position = Vector2( 576, 0 )
+scale = Vector2( 4, 4 )
+
+[node name="Dispensers" type="Node2D" parent="World"]
+
+[node name="Dispenser" parent="World/Dispensers" instance=ExtResource( 20 )]
+position = Vector2( 288, 504 )
+
+[node name="Button" parent="World/Dispensers/Dispenser" index="0"]
+position = Vector2( 88, 0 )
+
+[node name="Sprite" type="Sprite" parent="World/Dispensers/Dispenser"]
+texture = ExtResource( 19 )
+
+[node name="ItemBase" parent="World/Dispensers/Dispenser" instance=ExtResource( 18 )]
+texture = ExtResource( 19 )
+item_name = "Coxinha"
 
 [node name="DriveThru" parent="World" instance=ExtResource( 15 )]
 position = Vector2( -208.249, 513.429 )
+[connection signal="change_sprite" from="Quest" to="World/DriveThru" method="_on_Quest_change_sprite"]
+[connection signal="delete_pedido" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_delete_pedido"]
 [connection signal="endgame" from="Quest" to="CanvasLayer/Interface" method="ending"]
+[connection signal="new_dialog" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_new_dialog"]
+[connection signal="new_pedido" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_new_pedido"]
 [connection signal="second_passed" from="Quest" to="CanvasLayer/Interface" method="clock"]
+[connection signal="dialogo_terminado" from="CanvasLayer/Interface" to="Quest" method="_on_Interface_dialogo_terminado"]
+[connection signal="update_oxygen" from="World/Player" to="CanvasLayer/Interface" method="_on_Player_update_oxygen"]
+[connection signal="received_item" from="World/DriveThru" to="Quest" method="_on_DriveThru_received_item"]
+
+[editable path="World/Dispensers/Dispenser"]

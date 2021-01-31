@@ -7,7 +7,7 @@ func setup(sprite, id_):
 	id = id_
 
 func clock():
-	$Relogio.clock()
+	$Relogio.relogio()
 
 func get_id():
 	return id

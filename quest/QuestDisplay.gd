@@ -2,6 +2,7 @@ extends Control
 
 export(PackedScene) var cena_pedido
 var pedidos = []
+var pedido_positions = []
 var pedido_count = 0
 const X_OFFSET = 238
 const Y_OFFSET = 78
@@ -11,17 +12,22 @@ func add_pedido(sprite, id):
 	add_child(new)
 	move_child(new, get_child_count()-1)
 	new.setup(sprite, id)
-	new.rect_position = Vector2(238, Y_OFFSET*pedido_count)
+	for i in range(3):
+		if not i in pedido_positions:
+			new.rect_position = Vector2(238, Y_OFFSET*i)
+			break
 	
 	pedidos.append(new)
 	pedido_count += 1
-	$Count.text = str(pedido_count) + "/8"
 
 
 func delete_pedido(id):
+	$Count.text = str(pedido_count) + "/8"
 	for pedido in pedidos:
 		if pedido.get_id() == id:
+			pedido_positions.erase(pedido.rect_position/float(Y_OFFSET))
 			pedidos.erase(pedido)
+			pedido.queue_free()
 			break
 
 

@@ -226,7 +226,7 @@ margin_top = -47.1454
 margin_right = 240.622
 margin_bottom = -9.14543
 custom_fonts/font = SubResource( 2 )
-text = "3/8"
+text = "0/8"
 align = 2
 __meta__ = {
 "_edit_lock_": true,
@@ -448,7 +448,6 @@ __meta__ = {
 anims/pause = SubResource( 7 )
 
 [node name="GameUI" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 12 )
@@ -457,6 +456,7 @@ __meta__ = {
 }
 
 [node name="Pedidos" parent="GameUI" instance=ExtResource( 1 )]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = -496.965
 margin_top = 19.0871
 margin_right = -460.965
@@ -476,6 +476,7 @@ __meta__ = {
 }
 
 [node name="O2" type="Label" parent="GameUI"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 18.479
 margin_top = 547.585
 margin_right = 50.479
