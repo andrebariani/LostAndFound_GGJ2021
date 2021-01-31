@@ -1,22 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/Sentinela.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/setinel.png" type="Texture" id=2]
 [ext_resource path="res://objects/Tiro.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/images/placa_eletrica.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/tiro.png" type="Texture" id=5]
 
 [node name="Sentinela" type="Node2D"]
 script = ExtResource( 1 )
 tiro = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
 texture = ExtResource( 2 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( -48.7673, 1.61928 )
+position = Vector2( -28, 0 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="Sprite3" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
