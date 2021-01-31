@@ -108,6 +108,8 @@ func finalize_order():
 	
 	elif active_quests.empty():
 		new_quest()
+	else:
+		emit_signal("change_sprite", active_quests[-1])
 
 
 func endgame():

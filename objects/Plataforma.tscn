@@ -8,6 +8,7 @@ extents = Vector2( 128.345, 6.31898 )
 
 [node name="Plataforma" type="Node2D"]
 script = ExtResource( 2 )
+activated = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

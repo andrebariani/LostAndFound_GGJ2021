@@ -1,13 +1,13 @@
 extends "res://objects/Damage.gd"
 
-var present = true
+var present = false
 var activated = false
 export(Texture) var sprite
 
 
 func _ready():
 	$Sprite.texture = sprite
-	_on_Timer_timeout()
+	position.y += 100000
 
 
 func toggle():
@@ -23,20 +23,25 @@ func set_activated(a):
 			present = false
 		
 	else:
-		$Timer.start()
+		$Timer.start(2)
 
 
 func _on_Area2D_body_entered(body):
-	if !activated:
+	if !present:
 		return
 	
 	deal_damage(body)
 
 
 func _on_Timer_timeout():
+	if !activated:
+		return
+	
 	if present:
 		position.y += 100000
+		$Timer.start(2)
 	else:
 		position.y -= 100000
+		$Timer.start(0.5)
 	
 	present = !present

@@ -1,13 +1,10 @@
 extends Node
 
-
 var stateMachine = null
 var p = null
 
-
 func init():
 	pass
-
 
 func run(_delta):
 	if not p.is_on_wall():
