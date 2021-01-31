@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/itens/berinjela.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 16 )
+extents = Vector2( 8, 8 )
 
 [node name="Cartao" type="RigidBody2D"]
 collision_layer = 2
@@ -12,9 +12,7 @@ script = ExtResource( 1 )
 item_name = "Cartao"
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 8 )
 shape = SubResource( 1 )

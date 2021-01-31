@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gravity.png-15ff7687ce21d19f8a756c0f08e9d47f.stex"
+path="res://.import/ID_Card.png-2b5ec7bcdcadea35607d2bd7d1fed5d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tools/gravity.png"
-dest_files=[ "res://.import/gravity.png-15ff7687ce21d19f8a756c0f08e9d47f.stex" ]
+source_file="res://assets/images/tools/ID_Card.png"
+dest_files=[ "res://.import/ID_Card.png-2b5ec7bcdcadea35607d2bd7d1fed5d9.stex" ]
 
 [params]
 
