@@ -91,6 +91,7 @@ var cooldowns = {
 
 var damage_taken = 0
 var oxygen = MAX_OXYGEN
+var breathing = true
 
 var ferramenta = null
 
@@ -261,3 +262,8 @@ func get_damage_taken():
 func set_checkpoint(pos):
 	checkpoint_pos = pos
 
+func get_breathing():
+	return breathing
+
+func set_breathing(b):
+	breathing = b
