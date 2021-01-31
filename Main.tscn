@@ -65,6 +65,7 @@
 [node name="Main" type="Node"]
 
 [node name="Quest" parent="." instance=ExtResource( 12 )]
+locations = [ NodePath("../World/Dispensers/Suketa"), NodePath("../World/Dispensers/Boneco"), NodePath("../World/Dispensers/Berinjela"), NodePath("../World/Dispensers/Companion"), NodePath("../World/Dispensers/Vinil"), NodePath("../World/Dispensers/Queijo"), NodePath("../World/Dispensers/Bonsai"), NodePath("../World/Dispensers/Lampada"), NodePath("../World/Dispensers/Coxinha") ]
 player = NodePath("../World/Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -82,7 +83,19 @@ tile_data = PoolIntArray( -8454094, 0, 65538, -8454093, 0, 65538, -8454092, 0, 6
 [node name="Player" parent="World" instance=ExtResource( 1 )]
 position = Vector2( 104, 520 )
 collision_mask = 12
+FLOOR_ACC = 175
+FLOOR_FRICTION = 125
+AIR_FINAL_SPEED = 1100
+COYOTE_JUMP_FRAMES = 7
+CAN_DASH = true
+DASH_SPEED = 700
 START_GRAVITY_DIR = 0
+MAX_MULTIJUMP = 0
+CAN_WALLJUMP = true
+WALLSLIDE_SPEED = 100
+WALLJUMP_FRAMES = 10
+AIR_MOMENTUM_FRAMES = 10
+MAX_OXYGEN = 100
 
 [node name="Camera2D" type="Camera2D" parent="World/Player"]
 zoom = Vector2( 2, 2 )
@@ -1110,6 +1123,7 @@ position = Vector2( -208.249, 513.429 )
 [connection signal="new_pedido" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_new_pedido"]
 [connection signal="second_passed" from="Quest" to="CanvasLayer/Interface" method="clock"]
 [connection signal="set_item" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_set_item"]
+[connection signal="update_rotation" from="Quest" to="CanvasLayer/Interface" method="_on_Quest_update_rotation"]
 [connection signal="dialogo_terminado" from="CanvasLayer/Interface" to="Quest" method="_on_Interface_dialogo_terminado"]
 [connection signal="update_item" from="World/Player" to="Quest" method="_on_Player_update_item"]
 [connection signal="update_oxygen" from="World/Player" to="CanvasLayer/Interface" method="_on_Player_update_oxygen"]

@@ -26,3 +26,7 @@ func update_oxigenio(porcentagem):
 	
 	$Pedidos/Meter.rect_size = Vector2(30, ox_max*porcentagem)
 	$Pedidos/Meter.rect_position = Vector2(3, 3 + ox_max*(1-porcentagem) )
+
+
+func update_rotation(rotation):
+	$Seta.rect_rotation = rotation

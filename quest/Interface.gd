@@ -26,6 +26,9 @@ func set_ferramenta(_sprite):
 func set_item(_sprite):
 	$GameUI.set_item(_sprite)
 
+func update_rotation(rotation):
+	$GameUI.update_rotation(rotation)
+
 func ending(vitoria, vidas, tempo, satisfacao, count, pontuacao):
 	$Ending.activate(vitoria, vidas, tempo, satisfacao, count, pontuacao)
 
@@ -56,3 +59,7 @@ func _on_Player_update_tool(_sprite):
 
 func _on_Quest_set_item(_sprite):
 	set_item(_sprite)
+
+
+func _on_Quest_update_rotation(rotation):
+	update_rotation(rotation)

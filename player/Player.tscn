@@ -24,10 +24,22 @@ script = ExtResource( 1 )
 MAX_SPEED = 400
 MAX_JUMP = 1100
 MIN_JUMP = 500
+FLOOR_ACC = null
+FLOOR_FRICTION = null
 AIR_ACC = 75
 GRAVITY = 45
+AIR_FINAL_SPEED = null
+COYOTE_JUMP_FRAMES = null
+CAN_DASH = null
+DASH_SPEED = null
 DASH_FRAMES = 100
 START_GRAVITY_DIR = 1
+MAX_MULTIJUMP = null
+CAN_WALLJUMP = null
+WALLSLIDE_SPEED = null
+WALLJUMP_FRAMES = null
+AIR_MOMENTUM_FRAMES = null
+MAX_OXYGEN = null
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 2 )
