@@ -2,9 +2,9 @@ extends Control
 
 var id = 0
 
-func setup(sprite, id):
+func setup(sprite, id_):
 	$Icon.texture = sprite
-	self.id = id
+	id = id_
 
 
 func clock():

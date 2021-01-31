@@ -8,10 +8,10 @@ func toggle_pause():
 		
 	get_tree().paused = !get_tree().paused
 
+
 func navigation(up, down):
 	if !get_tree().paused:
 		return
-	
 	.navigation(up, down)
 
 

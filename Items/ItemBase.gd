@@ -1,21 +1,32 @@
 extends RigidBody2D
 
 
-var pos = Vector2(0,0)
+export var texture: Texture
+export var id: int
+export var item_name: String
+
 
 onready var collision = $CollisionShape2D
-onready var color = $ColorRect
+onready var sprite = $Sprite
+onready var dispenser = get_parent()
 
 
-func grabbed():
-	print_debug("Item grabbed!")
+var pos = Vector2(0,0)
+var destroyed = false
+
+
+func _ready():
+	self.add_to_group(item_name)
+	sprite.texture = texture
+
+
+func throw():
+	pass
+
+
+func destroy():
+	destroyed = true
 	
-
-func throwed(ori):
-	print_debug("Item throwed!")
-	#if ori != 0:
-		#self.applied_force.x = 200 * ori
-
-
+	
 func set_in_range(v):
 	pass

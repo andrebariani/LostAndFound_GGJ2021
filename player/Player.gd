@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 export (int) var MAX_SPEED = 300
 export (int) var MAX_JUMP = 300
 export (int) var MIN_JUMP = 300
@@ -90,7 +89,10 @@ var cooldowns = {
 var has_control = true
 var debug_on = true
 var is_held = false
+
+
 var item
+var checkpoint_pos
 
 
 func _ready():
@@ -117,7 +119,9 @@ func _physics_process(delta):
 		else:
 			grabRange.grab_nearest()
 	
-	self.apply_velocity()
+	self.apply_velocity(delta)
+	
+	self.take_damage()
 	
 	if debug_on:
 		debug.get_child(0).set_text(str(velocity))
@@ -125,8 +129,8 @@ func _physics_process(delta):
 		pass
 
 	
-func apply_velocity():
-	var snaps = [Vector2(0, 31), Vector2(31, 0), Vector2(0, -31), Vector2(31, 0)]
+func apply_velocity(delta):
+	var snaps = [Vector2(0, 16), Vector2(16, 0), Vector2(0, -16), Vector2(-16, 0)]
 	var floor_normals = [Vector2(0, -1), Vector2(-1, 0), Vector2(0, 1), Vector2(1, 0)]
 
 	if sm.state_curr == "Walljump":
@@ -152,7 +156,8 @@ func apply_velocity():
 			velocity.y = velocity_move
 			velocity.x = -velocity_jump
 
-	velocity = move_and_slide(velocity, floor_normals[gravity_dir])
+	velocity = move_and_slide_with_snap(velocity, snaps[gravity_dir], \
+		floor_normals[gravity_dir])
 
 
 func update_cooldown():
@@ -176,3 +181,7 @@ func approach(a, b, amount):
 		if(a < b):
 			return b
 	return a
+
+
+func take_damage():
+	pass
