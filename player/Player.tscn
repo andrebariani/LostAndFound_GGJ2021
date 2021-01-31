@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=12 format=2]
+=======
+[gd_scene load_steps=16 format=2]
+>>>>>>> Stashed changes
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -9,7 +13,14 @@
 [ext_resource path="res://player/StateMachine/state_dash.gd" type="Script" id=7]
 [ext_resource path="res://player/StateMachine/state_walljump.gd" type="Script" id=8]
 [ext_resource path="res://player/player_body/PlayerBody.tscn" type="PackedScene" id=9]
+<<<<<<< Updated upstream
 [ext_resource path="res://assets/images/space_background.png" type="Texture" id=10]
+=======
+[ext_resource path="res://player/GrabRange.gd" type="Script" id=10]
+[ext_resource path="res://player/GrabRangeTool.gd" type="Script" id=11]
+[ext_resource path="res://Items/Ferramenta.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/images/space_background.png" type="Texture" id=13]
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 24 )
@@ -80,5 +91,10 @@ current = true
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="space_background" type="Sprite" parent="ParallaxBackground"]
+<<<<<<< Updated upstream
 texture = ExtResource( 10 )
+=======
+position = Vector2( -0.233597, 3.04671 )
+texture = ExtResource( 13 )
+>>>>>>> Stashed changes
 centered = false
