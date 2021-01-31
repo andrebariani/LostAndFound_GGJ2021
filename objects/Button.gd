@@ -15,5 +15,5 @@ func _on_Button_body_exited(body):
 
 func _physics_process(_delta):
 	if p:
-		if p.inputs.grab:
+		if p.inputs.drop:
 			d.force_spawn()
