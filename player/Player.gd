@@ -14,7 +14,7 @@ export (int) var DASH_SPEED = 700
 export (int) var DASH_FRAMES = 15
 enum GRAVITY_DIR { DOWN, RIGHT, UP, LEFT }
 export(GRAVITY_DIR) var START_GRAVITY_DIR
-export (int) var MAX_AIRHOP = 0
+export (int) var MAX_MULTIJUMP = 0
 export (bool) var CAN_WALLJUMP = true
 export (int) var WALLSLIDE_SPEED = 100
 export (int) var WALLJUMP_FRAMES = 10
@@ -37,6 +37,7 @@ onready var floor_acc = FLOOR_ACC
 onready var floor_friction = FLOOR_FRICTION
 onready var air_acc = AIR_ACC
 onready var dash_speed = DASH_SPEED
+onready var max_multijump = MAX_MULTIJUMP
 onready var wallslide_speed = WALLSLIDE_SPEED
 
 
@@ -45,7 +46,9 @@ var velocity_jump = 0
 var velocity_move = 0
 
 var ori = 1
-var gravity_dir
+var gravity_dir = GRAVITY_DIR.DOWN
+var last_gravity_dir
+var multijump
 var gravity_on = true
 var floor_jump = false
 var floor_normal = Vector2(0,0)
@@ -99,7 +102,7 @@ func _ready():
 	sm.init(self, "Idle")
 	inputHelper.init(self)
 	grabRange.init(self)
-	gravity_dir = START_GRAVITY_DIR
+	self.set_gravity(START_GRAVITY_DIR)
 	
 	if debug_on:
 		debug.visible = true
@@ -158,6 +161,40 @@ func apply_velocity(delta):
 
 	velocity = move_and_slide_with_snap(velocity, snaps[gravity_dir], \
 		floor_normals[gravity_dir])
+
+
+func set_gravity(_grav):
+	if _grav != gravity_dir:
+		last_gravity_dir = gravity_dir
+		gravity_dir = _grav
+		
+		# jump_velocity = 0
+		
+		match gravity_dir:
+			GRAVITY_DIR.DOWN:
+				if last_gravity_dir != GRAVITY_DIR.LEFT:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, 0, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+			GRAVITY_DIR.RIGHT:
+				if last_gravity_dir != GRAVITY_DIR.UP:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, -90, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+			GRAVITY_DIR.UP:
+				if last_gravity_dir != GRAVITY_DIR.RIGHT:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, -180, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
+			GRAVITY_DIR.LEFT:
+				if last_gravity_dir != GRAVITY_DIR.DOWN:
+					ori *= -1
+				$Tween.interpolate_property(self, "rotation_degrees", self.rotation_degrees, 90, 0.5,
+						Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+				$Tween.start()
 
 
 func update_cooldown():

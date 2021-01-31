@@ -38,6 +38,8 @@ func grab_nearest():
 		item_in_range = null
 		item_sprite.visible = true
 		is_held = true
+		p.item = item
+		p.is_held = is_held
 
 
 func throw():
@@ -51,6 +53,9 @@ func throw():
 			i.throw(p.ori)
 		else:
 			i.throw(0)
+		
+		p.is_held = false
+		p.item = null
 		p.get_parent().add_child(i)
 		timer.start()
 		item_sprite.visible = false
@@ -62,7 +67,7 @@ func _on_GrabRange_body_entered(body):
 		body.set_in_range(true)
 		item_in_range = body
 
-
+# ODEIO VC GIT CUZAO DA PORRA
 func _on_GrabRange_body_exited(body):
 	if item_in_range and not is_held:
 		if body.get_instance_id() == item_in_range.get_instance_id():
