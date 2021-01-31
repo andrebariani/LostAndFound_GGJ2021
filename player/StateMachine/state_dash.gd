@@ -8,6 +8,7 @@ var p = null
 func init():
 	p.has_control = false
 	p.gravity_on = false
+	p.sfx_dash.play()
 	pass
 
 

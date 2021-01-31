@@ -26,9 +26,11 @@ func run(_delta):
 	if p.inputs.jump_jp:
 		if p.cooldowns.coyote.value < p.cooldowns.coyote.max_value:
 			p.velocity_jump = -p.max_jump
+			p.sfx_jump.play()
 		elif p.multijump != 0:
 			p.velocity_jump = -p.max_jump
 			p.multijump -= 1
+			p.sfx_jump.play()
 	
 	if p.inputs.jump_jr:
 		if(p.velocity_jump  < p.min_jump*-1):
