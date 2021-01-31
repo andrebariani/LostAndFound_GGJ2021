@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/Dispenser.gd" type="Script" id=1]
 [ext_resource path="res://objects/Button.gd" type="Script" id=2]
 [ext_resource path="res://assets/itens/sukita.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/whiteblock.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -16,6 +17,9 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Button"]
+texture = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 3, 3 )

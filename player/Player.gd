@@ -280,6 +280,7 @@ func approach(a, b, amount):
 
 
 func take_damage():
+	breathing = 0
 	damage_taken += 1
 	emit_signal("taken_damage")
 	if is_held():
