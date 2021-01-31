@@ -3,6 +3,7 @@ extends Node
 export var items = []
 export var clients = []
 export var locations = []
+export var areas = []
 export(NodePath) var player
 var dialog
 
@@ -76,8 +77,9 @@ func _ready():
 
 
 func _process(delta):
-	emit_signal( "update_rotation", 
-		player.position.angle_to_point(locations[active_quests[-1]]) )
+	if !active_quests.empty():
+		emit_signal( "update_rotation", 
+			rad2deg(player.position.angle_to_point(locations[active_quests[0]])) )
 
 
 func new_quest():
@@ -87,7 +89,7 @@ func new_quest():
 	times.append(0)
 	active_quests.append(current_obj)
 	emit_signal("change_sprite", clients[current_obj])
-	emit_signal("new_pedido", items[current_obj], current_obj)
+	emit_signal("new_pedido", items[current_obj], current_obj, areas[current_obj])
 	current_obj += 1
 
 

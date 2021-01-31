@@ -863,7 +863,7 @@ sprite = ExtResource( 23 )
 [node name="Laser2" parent="World/Objetos" groups=[
 "electric",
 ] instance=ExtResource( 22 )]
-position = Vector2( 6592, -656 )
+position = Vector2( 6592, -648 )
 rotation = 1.5708
 scale = Vector2( 4, 160 )
 sprite = ExtResource( 23 )
@@ -966,6 +966,9 @@ direcaox = 1
 
 [node name="Suketa" parent="World/Dispensers" instance=ExtResource( 20 )]
 position = Vector2( 7312, -920 )
+
+[node name="Button" parent="World/Dispensers/Suketa" index="0"]
+position = Vector2( 64, 0 )
 
 [node name="ItemBase" parent="World/Dispensers/Suketa" instance=ExtResource( 18 )]
 texture = ExtResource( 25 )

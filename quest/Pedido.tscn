@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://quest/Pedido.gd" type="Script" id=1]
 [ext_resource path="res://quest/Retangulo.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/itens/sukita.png" type="Texture" id=3]
 [ext_resource path="res://quest/Relogio.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 5 )
 
 [node name="Pedido" type="Control"]
 anchor_left = 1.0
@@ -35,7 +39,20 @@ __meta__ = {
 }
 
 [node name="Relogio" parent="." instance=ExtResource( 4 )]
-margin_left = -248.0
-margin_top = 22.4036
-margin_right = -80.0
-margin_bottom = 89.4036
+margin_left = -248.271
+margin_top = 7.82971
+margin_right = -80.2714
+margin_bottom = 39.8297
+text = "0:00"
+
+[node name="Area" type="Label" parent="."]
+margin_left = -237.0
+margin_top = 49.0
+margin_right = -82.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 1 )
+text = "Admin"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

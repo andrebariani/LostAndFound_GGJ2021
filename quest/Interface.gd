@@ -13,8 +13,8 @@ func _ready():
 func new_dialog(lines):
 	$DialogController.new_dialog(lines)
 
-func add_pedido(sprite_, id):
-	$QuestDisplay.add_pedido(sprite_, id)
+func add_pedido(sprite_, id, area):
+	$QuestDisplay.add_pedido(sprite_, id, area)
 
 func delete_pedido(id):
 	$QuestDisplay.delete_pedido(id)
@@ -44,8 +44,8 @@ func _on_DialogController_dialogo_terminado():
 func _on_Player_update_oxygen(porcentagem):
 	$GameUI.update_oxigenio(porcentagem)
 
-func _on_Quest_new_pedido(sprite_, id):
-	add_pedido(sprite_, id)
+func _on_Quest_new_pedido(sprite_, id, area):
+	add_pedido(sprite_, id, area)
 
 func _on_Quest_new_dialog(lines):
 	new_dialog(lines)
@@ -62,4 +62,4 @@ func _on_Quest_set_item(_sprite):
 
 
 func _on_Quest_update_rotation(rotation):
-	update_rotation(rotation)
+	update_rotation(rotation-90)
