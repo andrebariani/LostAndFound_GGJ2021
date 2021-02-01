@@ -83,7 +83,7 @@ func _process(_delta):
 
 
 func new_quest():
-	if active_quests.size() >= 3 or current_obj >= 8:
+	if active_quests.size() >= 3 or current_obj >= 9:
 		return
 	
 	times.append(0)

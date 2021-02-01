@@ -20,11 +20,11 @@ func add_pedido(sprite, id, area):
 			break
 	
 	pedidos.append(new)
-	pedido_count += 1
 
 
 func delete_pedido(id):
-	$Count.text = str(pedido_count) + "/8"
+	pedido_count += 1
+	$Count.text = str(pedido_count) + "/9"
 	for pedido in pedidos:
 		if pedido.get_id() == id:
 			pedido_positions.erase(pedido.get_index())
