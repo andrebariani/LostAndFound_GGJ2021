@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coxinha_pequena.png-a96bca4d70ca1aa07526d5d911871120.stex"
+path="res://.import/berinjela.png-69622c8f9e5130d5b3b46d9c0f51efc1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/coxinha_pequena.png"
-dest_files=[ "res://.import/coxinha_pequena.png-a96bca4d70ca1aa07526d5d911871120.stex" ]
+source_file="res://assets/images/itens/berinjela.png"
+dest_files=[ "res://.import/berinjela.png-69622c8f9e5130d5b3b46d9c0f51efc1.stex" ]
 
 [params]
 

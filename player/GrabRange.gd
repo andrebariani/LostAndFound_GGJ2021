@@ -3,7 +3,8 @@ extends Area2D
 var p = null
 signal can_grab
 
-var item_in_range
+var item_in_range = null
+var dispenser_in_range = null
 var is_held = false
 
 export var item_base = preload("res://Items/ItemBase.tscn")
@@ -38,6 +39,11 @@ func grab_nearest():
 		set_visible(true)
 		is_held = true
 		return true
+	
+	elif dispenser_in_range:
+		item_in_range = dispenser_in_range.spawn()
+		return grab_nearest()
+	
 	return false
 
 
@@ -73,12 +79,20 @@ func _on_GrabRange_body_entered(body):
 		body.set_in_range(true)
 		item_in_range = body
 
-
 func _on_GrabRange_body_exited(body):
 	if item_in_range and not is_held:
 		if body.get_instance_id() == item_in_range.get_instance_id():
 			item_in_range = null
 			body.set_in_range(false)
+
+
+func _on_GrabRange_area_entered(area):
+	if !area.has_method("is_tool") and dispenser_in_range == null:
+		dispenser_in_range = area
+
+func _on_GrabRange_area_exited(area):
+	if !area.has_method("is_tool") and dispenser_in_range == area:
+		dispenser_in_range = null
 
 
 func _on_Timer_timeout():

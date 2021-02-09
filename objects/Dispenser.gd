@@ -1,43 +1,29 @@
-extends Position2D
+extends Area2D
 
 export var item_base = preload("res://Items/ItemBase.tscn")
 
-onready var item = {
+export var item = {
 	texture = Texture,
 	id = 0,
 	item_name = ""
 }
 
-
-func _physics_process(_delta):
-	if get_tree().get_nodes_in_group(item.item_name).size():
-		var i = get_tree().get_nodes_in_group(item.item_name)[0]
-		if i:
-			if i.item_name == item.item_name:
-				if i.destroyed:
-					i.queue_free()
-					spawn()
-
-
 func _ready():
-	ready()
+	pass
 
-func ready():
-	var i = get_child(2)
-	
-	item.texture = i.texture
-	item.id = i.id
-	item.item_name = i.item_name
 
 func spawn():
+	get_tree().call_group(item.item_name, "destroy")
+	
 	var i = item_base.instance()
+	i.add_to_group(item.item_name)
 	i.texture = item.texture
 	i.id = item.id
 	i.item_name = item.item_name
 	i.global_position = self.global_position
 	i.dispenser = self
-	#print_debug(i.global_position)
 	self.get_parent().add_child(i)
+	return i
 	
 	
 func force_spawn():

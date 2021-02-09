@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vinil.png-ffe2fc520c49eef58e5fcc7a1bb85587.stex"
+path="res://.import/lampada.png-cc1316b120663d66732cd36717edc251.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/vinil.png"
-dest_files=[ "res://.import/vinil.png-ffe2fc520c49eef58e5fcc7a1bb85587.stex" ]
+source_file="res://assets/images/itens/lampada.png"
+dest_files=[ "res://.import/lampada.png-cc1316b120663d66732cd36717edc251.stex" ]
 
 [params]
 

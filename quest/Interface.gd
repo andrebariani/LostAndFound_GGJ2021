@@ -63,3 +63,7 @@ func _on_Quest_set_item(_sprite):
 
 func _on_Quest_update_rotation(rotation):
 	update_rotation(rotation-90)
+
+
+func _on_Player_taken_damage():
+	set_item(null)
