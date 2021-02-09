@@ -1,19 +1,22 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Items/Ferramenta.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/itens/berinjela.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/tools/gravity.png" type="Texture" id=2]
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 12.2765
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
-
-[node name="Cartao" type="RigidBody2D"]
+[node name="Modulador" type="RigidBody2D"]
+position = Vector2( 8, -16 )
 collision_layer = 2
 script = ExtResource( 1 )
-item_name = "Cartao"
+texture = ExtResource( 2 )
+id = 3
+item_name = "Modulador"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.19911, 0 )
 shape = SubResource( 1 )

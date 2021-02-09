@@ -8,10 +8,10 @@ var opened = false
 export var start_open = false
 export var last_gate = false
 
-const UPPER_OPEN = Vector2(0, -175)
-const UPPER_CLOSED = Vector2(0, 0)
-const LOWER_OPEN = Vector2(0, 175)
-const LOWER_CLOSED = Vector2(0, 0)
+const UPPER_OPEN = Vector2(0, -120)
+const UPPER_CLOSED = Vector2(0, 35)
+const LOWER_OPEN = Vector2(0, 120)
+const LOWER_CLOSED = Vector2(0, -35)
 
 func _ready():
 	upper_target = $Upper.position
@@ -34,6 +34,7 @@ func toggle():
 	else:
 		open()
 
+
 func open():
 	upper_target = UPPER_OPEN
 	lower_target = LOWER_OPEN
@@ -46,10 +47,3 @@ func close():
 	lower_target = LOWER_CLOSED
 	finished = false
 	opened = false
-
-
-func _on_CloseUpperGate_area_entered(_area):
-	close()
-
-func _on_OpenGate_area_entered(_area):
-	open()

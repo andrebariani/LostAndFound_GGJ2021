@@ -173,10 +173,15 @@ volume_db = 10.0
 [node name="use" type="AudioStreamPlayer2D" parent="Sfx"]
 stream = ExtResource( 17 )
 volume_db = 10.0
+[connection signal="area_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_area_entered"]
+[connection signal="area_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_area_exited"]
 [connection signal="body_entered" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRange" to="PlayerBody/GrabRange" method="_on_GrabRange_body_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRange/Timer" to="PlayerBody/GrabRange" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_area_entered"]
+[connection signal="area_exited" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_area_exited"]
 [connection signal="body_entered" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_body_entered"]
 [connection signal="body_exited" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_body_exited"]
+[connection signal="tree_entered" from="PlayerBody/GrabRangeTool" to="PlayerBody/GrabRangeTool" method="_on_GrabRange_area_exited"]
 [connection signal="timeout" from="PlayerBody/GrabRangeTool/Timer" to="PlayerBody/GrabRangeTool" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

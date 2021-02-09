@@ -21,9 +21,12 @@ format = 1
 tile_data = PoolIntArray( 0, 1, 131072, 1, 1, 131073, 2, 1, 131073, 3, 1, 131073, 4, 1, 131074, 65536, 1, 262144, 65537, 1, 262145, 65538, 1, 262145, 65539, 1, 262145, 65540, 1, 262146 )
 
 [node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 80, 32 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
-centered = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
@@ -33,7 +36,7 @@ position = Vector2( 78.0575, -3.12787 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 80, 32 )
+position = Vector2( 80, 56 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]

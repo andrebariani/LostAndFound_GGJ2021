@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/berinjela.png-516f38db31191395376f8f2fe0f6588b.stex"
+path="res://.import/companion.png-ad726d3e253fca891391be42b499d65f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/berinjela.png"
-dest_files=[ "res://.import/berinjela.png-516f38db31191395376f8f2fe0f6588b.stex" ]
+source_file="res://assets/images/itens/companion.png"
+dest_files=[ "res://.import/companion.png-ad726d3e253fca891391be42b499d65f.stex" ]
 
 [params]
 

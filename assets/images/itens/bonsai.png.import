@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/boneco.png-9641618f8c31650a032caaa510bff43f.stex"
+path="res://.import/bonsai.png-de6235da0bf439dec329cb72bba1ddaf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/boneco.png"
-dest_files=[ "res://.import/boneco.png-9641618f8c31650a032caaa510bff43f.stex" ]
+source_file="res://assets/images/itens/bonsai.png"
+dest_files=[ "res://.import/bonsai.png-de6235da0bf439dec329cb72bba1ddaf.stex" ]
 
 [params]
 
