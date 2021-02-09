@@ -101,7 +101,6 @@ var cooldowns = {
 
 var damage_taken = 0
 var oxygen = MAX_OXYGEN
-var breathing = 0
 
 var hyperjump = 0
 var in_space = false
@@ -301,7 +300,6 @@ func approach(a, b, amount):
 
 func take_damage():
 	sfx_lose.play()
-	breathing = 0
 	damage_taken += 1
 	emit_signal("taken_damage")
 	if is_held():
@@ -360,12 +358,6 @@ func get_damage_taken():
 
 func set_checkpoint(pos):
 	checkpoint_pos = pos
-
-func get_breathing():
-	return breathing
-
-func add_breathing(b):
-	breathing += b
 
 
 func _show_collision_particles():

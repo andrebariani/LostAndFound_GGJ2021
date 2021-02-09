@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sukita.png-260ae1ef0eed6e928faad4e20fb9447b.stex"
+path="res://.import/sukita.png-cbc9b03287d7b4b5bc1cdb93d57ac426.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/sukita.png"
-dest_files=[ "res://.import/sukita.png-260ae1ef0eed6e928faad4e20fb9447b.stex" ]
+source_file="res://assets/images/itens/sukita.png"
+dest_files=[ "res://.import/sukita.png-cbc9b03287d7b4b5bc1cdb93d57ac426.stex" ]
 
 [params]
 

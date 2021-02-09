@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bonecoPequeno.png-2efe65b3f93e8676fdcce9a0bcef4cc3.stex"
+path="res://.import/bonecoPequeno.png-3cb70c18742ad2031d3ce062974905a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/bonecoPequeno.png"
-dest_files=[ "res://.import/bonecoPequeno.png-2efe65b3f93e8676fdcce9a0bcef4cc3.stex" ]
+source_file="res://assets/images/itens/bonecoPequeno.png"
+dest_files=[ "res://.import/bonecoPequeno.png-3cb70c18742ad2031d3ce062974905a3.stex" ]
 
 [params]
 

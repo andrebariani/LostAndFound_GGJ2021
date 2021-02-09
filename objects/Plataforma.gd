@@ -10,12 +10,16 @@ export var activated = true
 var distancing = true
 
 var body_array = []
+var item_array = []
 
 func _ready():
 	origin_position = self.position
 
 
 func _process(_delta):
+	for item in item_array:
+		item.global_position = $Area2D.global_position
+	
 	if activated == false:
 		return
 	
@@ -49,7 +53,13 @@ func invert_direction():
 
 
 func _on_Area2D_body_entered(body):
-	body_array.append(body)
+	if body.name == "Player":
+		body_array.append(body)
+	else:
+		item_array.append(body)
 
 func _on_Area2D_body_exited(body):
-	body_array.erase(body)
+	if body.name == "Player":
+		body_array.erase(body)
+	else:
+		item_array.append(body)

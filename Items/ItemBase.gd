@@ -9,7 +9,6 @@ onready var sprite = $Sprite
 var dispenser = null
 
 var pos = Vector2(0,0)
-var destroyed = false
 
 
 func _ready():
@@ -32,8 +31,6 @@ func throw(_v):
 
 
 func destroy():
-	dispenser.spawn()
-	destroyed = true
 	queue_free()
 
 

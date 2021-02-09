@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lampada_pequena.png-0bb8dfe30b72842860ba03ac59b163a0.stex"
+path="res://.import/boneco.png-c0444da012fdca167174b4873a382931.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/lampada_pequena.png"
-dest_files=[ "res://.import/lampada_pequena.png-0bb8dfe30b72842860ba03ac59b163a0.stex" ]
+source_file="res://assets/images/itens/boneco.png"
+dest_files=[ "res://.import/boneco.png-c0444da012fdca167174b4873a382931.stex" ]
 
 [params]
 

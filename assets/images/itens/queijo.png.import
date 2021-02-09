@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bonsai.png-2831dbaa936b91cd839d57ad2202b518.stex"
+path="res://.import/queijo.png-aaa40a12cae096374a90865b76ede288.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/bonsai.png"
-dest_files=[ "res://.import/bonsai.png-2831dbaa936b91cd839d57ad2202b518.stex" ]
+source_file="res://assets/images/itens/queijo.png"
+dest_files=[ "res://.import/queijo.png-aaa40a12cae096374a90865b76ede288.stex" ]
 
 [params]
 

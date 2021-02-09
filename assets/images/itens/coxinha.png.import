@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coxinha.png-147f25c5a85f7a3c1c9c820f9c2b1132.stex"
+path="res://.import/coxinha.png-011e4c54528e3dda529cd3f60bfec779.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/coxinha.png"
-dest_files=[ "res://.import/coxinha.png-147f25c5a85f7a3c1c9c820f9c2b1132.stex" ]
+source_file="res://assets/images/itens/coxinha.png"
+dest_files=[ "res://.import/coxinha.png-011e4c54528e3dda529cd3f60bfec779.stex" ]
 
 [params]
 

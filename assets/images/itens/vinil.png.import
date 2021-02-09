@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/queijo.png-8febf81d3c36d565748352120d6a9a63.stex"
+path="res://.import/vinil.png-7c95868d1bddf3774faa4807b6d05b30.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/itens/queijo.png"
-dest_files=[ "res://.import/queijo.png-8febf81d3c36d565748352120d6a9a63.stex" ]
+source_file="res://assets/images/itens/vinil.png"
+dest_files=[ "res://.import/vinil.png-7c95868d1bddf3774faa4807b6d05b30.stex" ]
 
 [params]
 
