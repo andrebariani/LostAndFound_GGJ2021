@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/tileset_teste.tres" type="TileSet" id=1]
+[ext_resource path="res://objects/Tranca.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/placa_eletrica.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/placa_tranca.png" type="Texture" id=4]
+
+[node name="Tranca" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 4
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( 0, 1, 131072, 1, 1, 131073, 2, 1, 131073, 3, 1, 131073, 4, 1, 131073, 5, 1, 131074, 65536, 1, 262144, 65537, 1, 262145, 65538, 1, 262145, 65539, 1, 262145, 65540, 1, 262145, 65541, 1, 262146 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 72, 32 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 120, 32 )
+texture = ExtResource( 4 )

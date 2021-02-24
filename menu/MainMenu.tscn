@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://quest/Retangulo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/images/page_space_background.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/title.png" type="Texture" id=5]
+[ext_resource path="res://assets/sons/GGJ_2021.ogg" type="AudioStream" id=6]
+[ext_resource path="res://menu/Leaderboard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/MenuOpcoes.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -17,21 +25,163 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 parent = NodePath(".")
+count = 4
 
-[node name="Jogar" parent="." instance=ExtResource( 3 )]
-margin_left = -438.628
-margin_top = -62.8523
-margin_right = -124.628
-margin_bottom = -15.8523
-color = Color( 0.65098, 0.65098, 0.65098, 1 )
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+bus = "New Bus"
 
-[node name="Label" type="Label" parent="Jogar"]
-margin_left = 44.0
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 576.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Leaderboard" parent="." instance=ExtResource( 7 )]
+
+[node name="Title" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 31.8559
+margin_top = 43.5166
+margin_right = 87.856
+margin_bottom = -298.483
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuOpcoes" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Nome" type="LineEdit" parent="MenuOpcoes"]
+margin_left = 136.239
+margin_top = 209.659
+margin_right = 435.239
+margin_bottom = 253.659
+custom_fonts/font = SubResource( 2 )
+text = "Iporanga"
+max_length = 12
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="NomeLabel" type="Label" parent="MenuOpcoes"]
+margin_left = 134.531
+margin_top = 257.514
+margin_right = 434.531
+margin_bottom = 293.514
+custom_fonts/font = SubResource( 1 )
+text = "NOME DE JOGADOR"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeSlider" type="HSlider" parent="MenuOpcoes"]
+margin_left = 130.125
+margin_top = 319.895
+margin_right = 438.125
+margin_bottom = 380.895
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeLabel" type="Label" parent="MenuOpcoes"]
+margin_left = 134.531
+margin_top = 369.102
+margin_right = 434.531
+margin_bottom = 405.102
+custom_fonts/font = SubResource( 1 )
+text = "VOLUME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sair2" parent="MenuOpcoes" instance=ExtResource( 3 )]
+margin_left = -385.767
+margin_top = 172.313
+margin_right = -71.7668
+margin_bottom = 219.313
+color = Color( 0.223529, 0.27451, 0.431373, 1 )
+
+[node name="Label" type="Label" parent="MenuOpcoes/Sair2"]
+margin_left = 34.2259
 margin_top = 6.0
-margin_right = 286.0
+margin_right = 276.226
 margin_bottom = 42.0
 custom_fonts/font = SubResource( 1 )
-text = "JOGAR"
+text = "ESC - VOLTAR"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Classico" parent="." instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 152.118
+margin_top = 221.855
+margin_right = 466.118
+margin_bottom = 268.855
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Label" type="Label" parent="Classico"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 304.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "CLÁSSICO"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Random" parent="." instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 152.118
+margin_top = 301.855
+margin_right = 466.118
+margin_bottom = 348.855
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Label" type="Label" parent="Random"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 304.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 1 )
+text = "ALEATÓRIO"
 align = 1
 valign = 1
 __meta__ = {
@@ -40,10 +190,12 @@ __meta__ = {
 }
 
 [node name="Opcoes" parent="." instance=ExtResource( 3 )]
-margin_left = -441.552
-margin_top = 30.2236
-margin_right = -127.552
-margin_bottom = 77.2236
+anchor_top = 0.0
+anchor_bottom = 1.0
+margin_left = -359.882
+margin_top = 381.855
+margin_right = -45.8821
+margin_bottom = -147.145
 color = Color( 0.356863, 0.356863, 0.356863, 1 )
 
 [node name="Label" type="Label" parent="Opcoes"]
@@ -61,10 +213,10 @@ __meta__ = {
 }
 
 [node name="Sair" parent="." instance=ExtResource( 3 )]
-margin_left = -439.203
-margin_top = 126.85
-margin_right = -125.203
-margin_bottom = 173.85
+margin_left = -359.882
+margin_top = 173.855
+margin_right = -45.8821
+margin_bottom = 220.855
 color = Color( 0.356863, 0.356863, 0.356863, 1 )
 
 [node name="Label" type="Label" parent="Sair"]
@@ -80,3 +232,6 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+[connection signal="return_opcoes" from="MenuOpcoes" to="." method="_on_MenuOpcoes_return_opcoes"]
+[connection signal="text_changed" from="MenuOpcoes/Nome" to="MenuOpcoes" method="_on_LineEdit_text_changed"]
+[connection signal="value_changed" from="MenuOpcoes/VolumeSlider" to="MenuOpcoes" method="_on_VolumeSlider_value_changed"]

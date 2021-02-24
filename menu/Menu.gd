@@ -3,11 +3,12 @@ extends Control
 export(Color) var color_inactive = Color('a6a6a6')
 export(Color) var color_active = Color('5b5b5b')
 export(NodePath) var parent
+export var count = 3
 var menu_offset
 
 func _ready():
 	parent = get_node(parent)
-	menu_offset = parent.get_child_count()-3
+	menu_offset = parent.get_child_count()-count
 	parent.get_child(menu_offset).set("color", color_inactive)
 
 
@@ -30,13 +31,13 @@ func _input(event):
 func navigation(up, _down):
 	parent.get_child(menu_offset).set("color", color_active)
 	if up:
-		if menu_offset == parent.get_child_count()-3:
+		if menu_offset == parent.get_child_count()-count:
 			menu_offset = parent.get_child_count()-1
 		else:
 			menu_offset -= 1
 	else:
 		if menu_offset == parent.get_child_count()-1:
-			menu_offset = parent.get_child_count()-3
+			menu_offset = parent.get_child_count()-count
 		else:
 			menu_offset += 1
 		
