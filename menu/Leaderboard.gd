@@ -11,7 +11,7 @@ class MyCustomSorter:
 		return false
 	
 	static func sort_tempo(a, b):
-		if a["tempo"] > b["tempo"]:
+		if a["tempo"] < b["tempo"]:
 			return true
 		return false
 	
@@ -21,12 +21,12 @@ class MyCustomSorter:
 		return false
 	
 	static func sort_score(a, b):
-		if a["score"] < b["score"]:
+		if a["score"] > b["score"]:
 			return true
 		return false
 
 func _ready():
-	$HTTPRequest.request('http://localhost/iss-leaderboards?view=""')
+	$HTTPRequest.request('https://iss-leaderboards.herokuapp.com/?view=a')
 
 
 func _input(event):
