@@ -29,6 +29,8 @@ onready var grabRange = $PlayerBody/GrabRange
 onready var grabRangeTool = $PlayerBody/GrabRangeTool
 onready var debug = $Debug
 
+onready var par = load("res://player/player_body/Particles.tscn")
+onready var rng = RandomNumberGenerator.new()
 
 onready var sfx_jump = $Sfx/jump
 onready var sfx_dash = $Sfx/dash
@@ -362,10 +364,16 @@ func set_checkpoint(pos):
 
 func _show_collision_particles():
 	if sm.state_curr != "Idle":
-		var par = load("res://player/player_body/Particles.tscn")
 		for i in range(get_slide_count()):
 			var collision = get_slide_collision(i)
 			if collision.get_travel().length_squared() < 2:
-				var new_par = par.instance()
-				new_par.set_global_position(collision.position)
-				$ParticlesContainer.add_child(new_par)
+				_show_particles(collision.position)
+
+func _show_particles(pos) -> void:
+	var new_par = par.instance()
+	new_par.set_global_position(pos)
+	$ParticlesContainer.add_child(new_par)
+
+func _process(delta):
+	if sm.state_curr == "Dash":
+		_show_particles(self.position + Vector2(0, rng.randfn()*10))

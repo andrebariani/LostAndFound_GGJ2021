@@ -20,3 +20,11 @@ func activate(vitoria, dano, tempo, satisfacao, count, pontuacao):
 	$Pedidos/Satisfacao.text = "Satisfação: " + str(satisfacao) + "/" + str(count)
 	$Pedidos/Pontuacao.text = "Pontuação: " + str(pontuacao)
 	$AnimationPlayer.play("activate")
+	
+	var data := {"nome":Global.player_name, "dano":dano, "satisfacao":satisfacao, "tempo":tempo,"score":pontuacao,"add":"Add"}
+	_make_post_request('https://iss-leaderboards.herokuapp.com//add.php', data, false)
+
+
+func _make_post_request(url, data_to_send, use_ssl):
+	var headers = ["Content-Type: application/json"]
+	$HTTPRequest.request(url, [], use_ssl, HTTPClient.METHOD_POST, to_json(data_to_send))

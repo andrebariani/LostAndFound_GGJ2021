@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/page_space_background.png-48fb977d61d21ef47550de6ac2e7c2da.stex"
+path="res://.import/light_star.png-8a5b6d9f70cfcee20ca8e8fae346ebc3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/page_space_background.png"
-dest_files=[ "res://.import/page_space_background.png-48fb977d61d21ef47550de6ac2e7c2da.stex" ]
+source_file="res://assets/images/light_star.png"
+dest_files=[ "res://.import/light_star.png-8a5b6d9f70cfcee20ca8e8fae346ebc3.stex" ]
 
 [params]
 

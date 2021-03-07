@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/page_space_background.png-48fb977d61d21ef47550de6ac2e7c2da.stex"
+path="res://.import/barrel.png-33adc83c24fad036561a0e3f55bb6136.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/page_space_background.png"
-dest_files=[ "res://.import/page_space_background.png-48fb977d61d21ef47550de6ac2e7c2da.stex" ]
+source_file="res://assets/images/barrel.png"
+dest_files=[ "res://.import/barrel.png-33adc83c24fad036561a0e3f55bb6136.stex" ]
 
 [params]
 
