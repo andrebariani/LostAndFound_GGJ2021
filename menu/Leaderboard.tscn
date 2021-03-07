@@ -5,10 +5,10 @@
 [ext_resource path="res://menu/Leaderboard.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -25,6 +25,21 @@ __meta__ = {
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
+[node name="Carregando" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 664.344
+margin_top = 18.4958
+margin_right = -73.6555
+margin_bottom = -519.504
+custom_fonts/font = SubResource( 1 )
+text = "CARREGANDO..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Ranking" parent="." instance=ExtResource( 2 )]
 margin_left = 141.018
 margin_top = -227.412
@@ -35,7 +50,7 @@ color = Color( 0.454902, 0.454902, 0.454902, 1 )
 [node name="Label" type="Label" parent="Ranking"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "RANKING"
 align = 1
 valign = 1
@@ -55,7 +70,7 @@ color = Color( 0.454902, 0.454902, 0.454902, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -12.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "SCORE"
 align = 2
 valign = 1
@@ -73,7 +88,7 @@ color = Color( 0.223529, 0.27451, 0.431373, 1 )
 [node name="Label2" type="Label" parent="Z"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Z"
 align = 1
 valign = 1
@@ -86,6 +101,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
