@@ -13,6 +13,7 @@ func run(_delta):
 		p.velocity_move = 0
 		
 	p.floor_jump = false
+	p.can_dash = true
 	
 	if p.is_on_floor():
 		p.velocity_jump = 0

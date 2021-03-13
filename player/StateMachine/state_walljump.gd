@@ -21,6 +21,7 @@ func run(_delta):
 			stateMachine.change_state("Air")
 		
 	p.floor_jump = false
+	p.can_dash = true
 	
 	if p.input_dir_vector.x == 0:
 		if p.cooldowns.walljump.value == p.cooldowns.walljump.max_value:

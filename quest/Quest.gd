@@ -8,11 +8,12 @@ export(NodePath) var player
 var dialog
 
 var total_time = 0
-var times = []
+var times = {}
 var current_obj = 0
 var received = 0
 var content = 0
 var active_quests = []
+var remaining_quests = range(9)
 
 signal update_rotation
 signal change_sprite
@@ -83,14 +84,22 @@ func _process(_delta):
 
 
 func new_quest():
-	if active_quests.size() >= 3 or current_obj >= 9:
+	if active_quests.size() >= 3 or current_obj >= 9 or remaining_quests.empty():
 		return
 	
-	times.append(0)
-	active_quests.append(current_obj)
-	emit_signal("change_sprite", clients[current_obj])
-	emit_signal("new_pedido", items[current_obj], current_obj, areas[current_obj])
-	current_obj += 1
+	var next_quest = 0
+	if !Global.get_random_mode():
+		next_quest = current_obj
+		current_obj += 1
+	else:
+		var random = randi() % len(remaining_quests)
+		next_quest = remaining_quests[random]
+		remaining_quests.remove(random)
+	
+	times[next_quest] = 0
+	active_quests.append(next_quest)
+	emit_signal("change_sprite", clients[next_quest])
+	emit_signal("new_pedido", items[next_quest], next_quest, areas[next_quest])
 
 
 func receive_order(id):
@@ -102,6 +111,7 @@ func receive_order(id):
 	emit_signal("delete_pedido", id)
 	
 	$Timer.stop()
+	$NewQuest.paused = true
 	player.has_control = false
 	active_quests.erase(id)
 	
@@ -112,6 +122,7 @@ func receive_order(id):
 
 func finalize_order():
 	$Timer.start()
+	$NewQuest.paused = false
 	player.has_control = true
 	player.destroy_item()
 	if received >= 9:

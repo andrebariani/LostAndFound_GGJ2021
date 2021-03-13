@@ -39,7 +39,7 @@ func run(_delta):
 	if p.is_on_ceiling():
 		p.velocity_jump = 0
 	
-	if p.inputs.dash:
+	if p.inputs.dash and p.can_dash:
 		p.cooldowns.dash.value = 0
 		stateMachine.change_state("Dash")
 	elif p.is_on_wall() and p.CAN_WALLJUMP and p.velocity_jump > -90:

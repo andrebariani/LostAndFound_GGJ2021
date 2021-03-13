@@ -1042,6 +1042,10 @@ scale = Vector2( 220, 38 )
 position = Vector2( 7008, -1952 )
 scale = Vector2( 136, 32 )
 
+[node name="SpaceArea6" parent="World/Objetos" instance=ExtResource( 17 )]
+position = Vector2( -2080, -3808 )
+scale = Vector2( 112, 400 )
+
 [node name="SpaceArea4" parent="World/Objetos" instance=ExtResource( 17 )]
 position = Vector2( 3232, -3808 )
 scale = Vector2( 46, 116 )

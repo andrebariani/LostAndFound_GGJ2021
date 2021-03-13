@@ -53,7 +53,7 @@ func _on_HTTPRequest_request_completed(_result, response_code, _headers, body):
 	print_debug("Code: " + str(response_code))
 	$Carregando.text = ""
 	
-	#display()
+	display()
 
 
 func display():

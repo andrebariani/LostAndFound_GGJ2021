@@ -11,12 +11,9 @@ func set_activated(new):
 
 
 func set_present(new):
-	if !activated:
-		return
-	
 	present = new
-	print_debug(present)
-	if !present:
+	
+	if !present and activated:
 		$TileMap.position.y = 10000
 		$Timer.start(1)
 	else:
