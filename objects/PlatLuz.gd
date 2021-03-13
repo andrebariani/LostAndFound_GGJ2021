@@ -1,23 +1,30 @@
 extends Node2D
 
-export var activated = true
-var present = true
+export var activated = false
+
+func _ready():
+	set_activated(false)
+
+
+func toggle():
+	set_activated(!activated)
+
 
 func set_activated(new):
-	set_present(new)
 	activated = new
+	set_present(new)
 	$Timer.paused = !activated
 	$Grace.paused = !activated
 
 
 func set_present(new):
-	present = new
-	
-	if !present and activated:
+	if !new:
 		$TileMap.position.y = 10000
+		visible = false
 		$Timer.start(1)
-	else:
+	elif activated:
 		$TileMap.position.y = 0
+		visible = true
 
 
 func _on_Area2D_body_entered(_body):
