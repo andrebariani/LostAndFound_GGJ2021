@@ -814,7 +814,7 @@ position = Vector2( 0, -48 )
 texture = ExtResource( 19 )
 
 [node name="Cartao" parent="World/Dispensers" instance=ExtResource( 34 )]
-position = Vector2( 1936, 528 )
+position = Vector2( 1928, 528 )
 item_base = ExtResource( 18 )
 item = {
 "id": 0,

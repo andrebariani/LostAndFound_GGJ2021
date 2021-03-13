@@ -7,7 +7,13 @@ export(Texture) var sprite
 
 func _ready():
 	$Sprite.texture = sprite
-	position.y += 100000
+	$Sprite.modulate.a = 0
+	$Area2D.position.y = 100000
+
+
+func _process(delta):
+	if !present and $Timer.time_left > 0 and $Timer.time_left < 1:
+		$Sprite.modulate.a = ((1.0 - $Timer.time_left))/2.0
 
 
 func toggle():
@@ -19,7 +25,8 @@ func set_activated(a):
 	if !activated:
 		$Timer.stop()
 		if present:
-			position.y += 100000
+			$Area2D.position.y = 100000
+			$Sprite.modulate.a = 0
 			present = false
 		
 	else:
@@ -38,11 +45,13 @@ func _on_Timer_timeout():
 		return
 	
 	if present:
-		position.y += 100000
+		$Area2D.position.y = 100000
+		$Sprite.modulate.a = 0
 		$Timer.start(2)
 		$sfx.play()
 	else:
-		position.y -= 100000
+		$Area2D.position.y = 0
+		$Sprite.modulate.a = 1
 		$Timer.start(0.5)
 		$sfx.stop()
 	
