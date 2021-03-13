@@ -13,6 +13,8 @@ func init():
 
 
 func run(_delta):
+	p.can_dash = false
+	
 	if not p.is_on_wall():
 		p.velocity_move = p.dash_speed*p.ori
 	else:

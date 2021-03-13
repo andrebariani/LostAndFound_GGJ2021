@@ -2,6 +2,7 @@ extends Label
 
 var clock = 0
 export var tempo_inicial = 0
+export var tempo_perigo = 100000000
 
 func reset():
 	clock = 0
@@ -29,3 +30,6 @@ func relogio():
 	else:
 		text += ":"
 	text += str(minutos)
+	
+	if clock > tempo_perigo:
+		modulate = Color.red

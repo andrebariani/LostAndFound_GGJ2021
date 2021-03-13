@@ -3,6 +3,7 @@ extends Node2D
 export(NodePath) var alvo
 export(PackedScene) var tiro
 var activated = false
+export var inverted = false
 
 func _ready():
 	alvo = get_node(alvo)
@@ -12,7 +13,8 @@ func _process(_delta):
 	if !activated:
 		return
 	
-	rotation = position.angle_to_point(Vector2(alvo.position))
+	if (alvo.position.x >= position.x) == inverted:
+		rotation = position.angle_to_point(Vector2(alvo.position))
 
 func toggle():
 	set_activated(!activated)
@@ -28,5 +30,5 @@ func _on_Timer_timeout():
 	if position.distance_to(alvo.position) <= 1250:
 		var new = tiro.instance()
 		get_parent().add_child(new)
-		new.position = position
+		new.global_position = $Sprite2.global_position
 		new.set_alvo(alvo)

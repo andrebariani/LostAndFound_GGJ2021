@@ -29,6 +29,11 @@ func _ready():
 	$HTTPRequest.request('https://iss-leaderboards.herokuapp.com/?view=a')
 
 
+func _make_post_request(url, data_to_send, use_ssl):
+	var headers = ["Content-Type: application/json"]
+	$HTTPRequest.request(url, [], use_ssl, HTTPClient.METHOD_POST, to_json(data_to_send))
+
+
 func _input(event):
 	if event.is_action_pressed("dash"):
 		if display_type < len(display_types)-1:
@@ -40,11 +45,13 @@ func _input(event):
 		display()
 
 
-func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+func _on_HTTPRequest_request_completed(_result, response_code, _headers, body):
+	print_debug(body)
 	var json = JSON.parse(body.get_string_from_utf8())
 	jogadores = json.result
 	print_debug(json.result)
 	print_debug("Code: " + str(response_code))
+	$Carregando.text = ""
 	
 	display()
 

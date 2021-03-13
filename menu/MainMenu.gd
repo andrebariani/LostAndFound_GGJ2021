@@ -9,8 +9,10 @@ func action():
 	
 	match(menu_offset - (parent.get_child_count()-count)):
 		0:
+			Global.set_random_mode(false)
 			get_tree().change_scene("res://Main.tscn")
 		1:
+			Global.set_random_mode(true)
 			get_tree().change_scene("res://Main.tscn")
 		2:
 			for option in menu_options:

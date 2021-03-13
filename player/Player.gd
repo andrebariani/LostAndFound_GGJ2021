@@ -106,6 +106,7 @@ var oxygen = MAX_OXYGEN
 
 var hyperjump = 0
 var in_space = false
+var can_dash = true
 
 var ferramenta = null
 

@@ -19,6 +19,7 @@ func run(_delta):
 	p.velocity_move = p.approach(p.velocity_move, p.max_speed * dir.x, p.floor_acc)
 
 	p.floor_jump = false
+	p.can_dash = true
 	
 	if p.is_on_floor():
 		p.velocity_jump = 0
