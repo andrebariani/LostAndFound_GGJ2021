@@ -16,7 +16,7 @@ func _ready():
 	origin_position = self.position
 
 
-func _process(_delta):
+func _physics_process(delta):
 	for item in item_array:
 		item.global_position = $Area2D.global_position
 	

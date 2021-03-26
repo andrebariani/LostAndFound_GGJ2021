@@ -28,7 +28,7 @@ func toggle():
 	activated = !activated
 
 
-func _process(delta):
+func _physics_process(delta):
 	if !activated:
 		return
 	

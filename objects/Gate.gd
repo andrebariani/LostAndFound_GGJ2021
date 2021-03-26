@@ -19,7 +19,7 @@ func _ready():
 	if start_open:
 		open()
 
-func _process(delta):
+func _physics_process(delta):
 	if !finished:
 		if abs((upper_target - $Upper.position).y) > 0.01 || abs((upper_target - $Upper.position).x) > 0.01:
 			$Upper.position += 2*delta*(upper_target - $Upper.position)
