@@ -24,9 +24,9 @@ func set_activated(a):
 	activated = a
 	if !activated:
 		$Timer.stop()
+		$Sprite.modulate.a = 0
 		if present:
 			$Area2D.position.y = 100000
-			$Sprite.modulate.a = 0
 			present = false
 		
 	else:
